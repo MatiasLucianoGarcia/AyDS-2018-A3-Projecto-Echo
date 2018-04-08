@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
   private Button goButton;
   private TextView textPane1;
 
-  //Prueba para commit 1
-  //Segunda prueba para commit
+  //Prueba 3
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
