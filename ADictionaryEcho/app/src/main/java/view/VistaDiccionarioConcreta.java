@@ -30,6 +30,9 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         textFieldIngresoPalabra = findViewById(R.id.textField1);
         botonTraductor = findViewById(R.id.goButton);
         etiquetaTextoTraducido = findViewById(R.id.textPane1);
+
+        initListener();
+
     }
 
     private void initListener(){
@@ -41,4 +44,8 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         });
     }
 
+    @Override
+    public void updateTexto(String palabraTraducida) {
+        etiquetaTextoTraducido.setText(palabraTraducida);
+    }
 }
