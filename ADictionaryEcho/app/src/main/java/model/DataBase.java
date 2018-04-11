@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.fulllogic;
+package model;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import ayds.dictionary.echo.fulllogic.room.*;
+import model.room.*;
 
 public class DataBase {
 

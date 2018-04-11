@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.fulllogic.room;
+package model.room;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.fulllogic.room;
+package model.room;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
