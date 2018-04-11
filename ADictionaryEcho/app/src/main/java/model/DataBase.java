@@ -8,11 +8,11 @@ import java.util.List;
 
 import model.room.*;
 
-public class DataBase {
+public class DataBase  implements StorageInterface{
 
   private static ConceptDataBase db;
 
-  public static void createNewDatabase(Context context) {
+  public  void createNewDatabase(Context context) {
     db = Room.databaseBuilder(context,
                               ConceptDataBase.class, "dictionary.db").build();
   }
@@ -31,7 +31,7 @@ public class DataBase {
     }
   }
 
-  public static void saveTerm(String term, String meaning) {
+  public void saveTerm(String term, String meaning) {
     Concept concept =  new Concept();
     concept.setTerm(term);
     concept.setMeaning(meaning);
@@ -39,7 +39,7 @@ public class DataBase {
     db.termDao().insert(concept);
   }
 
-  public static String getMeaning(String term) {
+  public  String getMeaning(String term) {
 
     Concept concept = db.termDao().findByName(term);
 
