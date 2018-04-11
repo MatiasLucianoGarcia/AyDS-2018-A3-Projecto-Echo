@@ -1,5 +1,6 @@
 package controlller;
 
+import model.DiccionarioModel;
 import view.VistaDiccionario;
 
 /**
@@ -7,9 +8,19 @@ import view.VistaDiccionario;
  */
 
 public class TradcutorControllerImpl implements TraductorController {
+
+    protected DiccionarioModel model;
+    protected VistaDiccionario vista;
+
+    public TradcutorControllerImpl(DiccionarioModel model, VistaDiccionario vista) {
+        this.model = model;
+        this.vista = vista;
+    }
+
     @Override
     public void onEventUpdate(String textoATraducir) {
-
+        String sig = model.retornarSignificado(textoATraducir);
+        vista.updateTexto(sig);
     }
 
     @Override
