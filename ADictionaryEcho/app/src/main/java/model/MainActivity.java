@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.fulllogic;
+package model;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
