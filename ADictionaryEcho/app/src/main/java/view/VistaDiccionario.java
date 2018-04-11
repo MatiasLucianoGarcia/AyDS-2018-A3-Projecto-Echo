@@ -5,4 +5,5 @@ package view;
  */
 
 public interface VistaDiccionario {
+
 }
