@@ -43,12 +43,16 @@ public class MainActivity extends AppCompatActivity {
     goButton = findViewById(R.id.goButton);
     textPane1 = findViewById(R.id.textPane1);
 
-    Retrofit retrofit = new Retrofit.Builder()
+    /*Retrofit retrofit = new Retrofit.Builder()
         .baseUrl("https://translate.yandex.net/api/v1.5/tr.json/")
         .addConverterFactory(ScalarsConverterFactory.create())
         .build();
 
-    final YandexAPI wikiAPI = retrofit.create(YandexAPI.class);
+    final YandexAPI wikiAPI = retrofit.create(YandexAPI.class);*/
+
+    ConexionAPIConcretaYandex conexionAPI = new ConexionAPIConcretaYandex();
+    conexionAPI.conectarAPI();
+    final YandexAPI yandex = conexionAPI.getYandex();
 
     goButton.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
               Response<String> callResponse;
               try {
-                callResponse = wikiAPI.getTerm(textField1.getText().toString()).execute();
+                callResponse = yandex.getTerm(textField1.getText().toString()).execute();
 
                 Log.e("**","JSON " + callResponse.body());
 
