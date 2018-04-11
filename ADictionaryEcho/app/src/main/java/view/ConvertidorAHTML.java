@@ -5,4 +5,15 @@ package view;
  */
 
 public class ConvertidorAHTML implements ConvertidorFormato {
+
+    public String formatTo(String text, String term) {
+
+        StringBuilder builder = new StringBuilder();
+
+        String textWithBold = text.replaceAll("(?i)" + term, "<b>" + term + "</b>");
+
+        builder.append(textWithBold);
+
+        return builder.toString();
+    }
 }

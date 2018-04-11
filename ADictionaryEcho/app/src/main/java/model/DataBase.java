@@ -12,6 +12,7 @@ public class DataBase  implements StorageInterface{
 
   private static ConceptDataBase db;
 
+
   public  void createNewDatabase(Context context) {
     db = Room.databaseBuilder(context,
                               ConceptDataBase.class, "dictionary.db").build();
@@ -48,5 +49,7 @@ public class DataBase  implements StorageInterface{
     }
     return null;
   }
+
+
 
 }

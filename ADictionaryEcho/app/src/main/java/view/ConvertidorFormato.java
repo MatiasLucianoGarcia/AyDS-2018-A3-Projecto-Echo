@@ -5,4 +5,6 @@ package view;
  */
 
 public interface ConvertidorFormato {
+
+    String formatTo (String text, String term);
 }

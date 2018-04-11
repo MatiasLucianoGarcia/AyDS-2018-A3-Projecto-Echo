@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public static String textToHtml(String text, String term) {
+/*  public static String textToHtml(String text, String term) {
 
     StringBuilder builder = new StringBuilder();
 
@@ -132,5 +132,5 @@ public class MainActivity extends AppCompatActivity {
     builder.append(textWithBold);
 
     return builder.toString();
-  }
+  }*/
 }
