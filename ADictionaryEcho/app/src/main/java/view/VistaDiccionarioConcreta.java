@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
+import controlller.TraductorController;
 
 /**
  * Created by tomas on 11/4/2018.
@@ -18,6 +19,8 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
     private EditText textFieldIngresoPalabra;
     private Button botonTraductor;
     private TextView etiquetaTextoTraducido;
+
+    private TraductorController controlador;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         botonTraductor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                controlador.onEventUpdate(textFieldIngresoPalabra.getText().toString());
             }
         });
     }
