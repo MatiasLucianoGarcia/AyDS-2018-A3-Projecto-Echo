@@ -10,12 +10,12 @@ import java.io.IOException;
 
 import retrofit2.Response;
 
-public class DiccionarioModelConcreta implements DiccionarioModel {
+public class TranslatorModelConcrete implements TranslatorModel {
 
     private String translatedWord;
-    private TraductorModelListener listener;
+    private TranslatorModelListener listener;
 
-    public DiccionarioModelConcreta() {}
+    public TranslatorModelConcrete() {}
 
     public void translateWord(String term) {
         String text = DataBase.getMeaning(term);
@@ -68,7 +68,7 @@ public class DiccionarioModelConcreta implements DiccionarioModel {
     }
 
     @Override
-    public void setListener(TraductorModelListener listener) {
+    public void setListener(TranslatorModelListener listener) {
         this.listener = listener;
     }
 }

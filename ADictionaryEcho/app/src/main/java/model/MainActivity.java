@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
   private Button goButton;
   private TextView textPane1;
 
-  //Prueba 4(Juano)
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

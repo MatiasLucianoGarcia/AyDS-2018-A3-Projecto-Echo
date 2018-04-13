@@ -8,9 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
-import controlller.TraductorController;
-import model.DiccionarioModel;
-import model.TraductorModelListener;
+import controller.TranslatorController;
+import model.TranslatorModel;
+import model.ModelModule;
+import model.TranslatorModelListener;
+import controller.ControllerModule;
 
 /**
  * Created by tomas on 11/4/2018.
@@ -22,19 +24,29 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
     private Button botonTraductor;
     private TextView etiquetaTextoTraducido;
 
-    private TraductorController controlador;
-    private DiccionarioModel modelo;
+    private TranslatorController controlador;
+    private TranslatorModel modelo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        initGraphic();
+        initArchitecture();
+        initListener();
 
+    }
+
+    private void initArchitecture(){
+        controlador= ControllerModule.getInstance().getTraductorController();
+        modelo = ModelModule.getInstance().getDiccionarioModel();
+    }
+
+    private void initGraphic(){
+
+        setContentView(R.layout.activity_main);
         textFieldIngresoPalabra = findViewById(R.id.textField1);
         botonTraductor = findViewById(R.id.goButton);
         etiquetaTextoTraducido = findViewById(R.id.textPane1);
-
-        initListener();
 
     }
 
@@ -45,12 +57,13 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
                 controlador.onEventUpdate(textFieldIngresoPalabra.getText().toString());
             }
         });
-        modelo.setListener(new TraductorModelListener() {
+        modelo.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord() {
                 updateTexto();
             }
         });
     }
+
 
     @Override
     public void updateTexto() {

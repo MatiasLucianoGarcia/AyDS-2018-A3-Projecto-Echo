@@ -4,6 +4,6 @@ package model;
  * Created by tomas on 13/4/2018.
  */
 
-public interface TraductorModelListener {
+public interface TranslatorModelListener {
     void didUpdateWord();
 }

@@ -1,4 +1,4 @@
-package controlller;
+package controller;
 
 import model.ModelModule;
 
@@ -15,7 +15,7 @@ public class ControllerModule {
         return instance;
     }
 
-    private TraductorController getEditUserController() {
-        return new TradcutorControllerImpl( ModelModule.getInstance().getDiccionarioModel());
+    public TranslatorController getTraductorController() {
+        return new TranslatorControllerImpl( ModelModule.getInstance().getDiccionarioModel());
     }
 }

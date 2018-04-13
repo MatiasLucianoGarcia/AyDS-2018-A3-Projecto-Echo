@@ -3,10 +3,10 @@ package model;
 public class ModelModule {
 
     private static ModelModule instance;
-    private DiccionarioModel dicModel;
+    private TranslatorModel dicModel;
 
     private ModelModule() {
-        dicModel =  new DiccionarioModelConcreta();
+        dicModel =  new TranslatorModelConcrete();
     }
 
     public static ModelModule getInstance() {
@@ -16,7 +16,7 @@ public class ModelModule {
         return instance;
     }
 
-    public DiccionarioModel getDiccionarioModel() {
+    public TranslatorModel getDiccionarioModel() {
         return dicModel;
     }
 }
