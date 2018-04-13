@@ -1,4 +1,4 @@
-package model;
+package model.service;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

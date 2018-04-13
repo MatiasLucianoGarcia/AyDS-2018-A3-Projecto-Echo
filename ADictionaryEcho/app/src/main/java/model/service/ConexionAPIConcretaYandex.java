@@ -1,4 +1,4 @@
-package model;
+package model.service;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -9,7 +9,7 @@ public class ConexionAPIConcretaYandex implements ConexionAPIInterface {
 
     public void conectarAPI() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://translate.yandex.net/api/v1.5/tr.json/")
+                .baseUrl(ServiceConfiguration.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
     }
