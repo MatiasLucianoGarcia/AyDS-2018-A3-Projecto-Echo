@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controlller.TraductorController;
+import model.DiccionarioModel;
+import model.TraductorModelListener;
 
 /**
  * Created by tomas on 11/4/2018.
@@ -21,6 +23,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
     private TextView etiquetaTextoTraducido;
 
     private TraductorController controlador;
+    private DiccionarioModel modelo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +45,15 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
                 controlador.onEventUpdate(textFieldIngresoPalabra.getText().toString());
             }
         });
+        modelo.setListener(new TraductorModelListener() {
+            @Override public void didUpdateWord() {
+                updateTexto();
+            }
+        });
     }
 
     @Override
-    public void updateTexto(String palabraTraducida) {
-        etiquetaTextoTraducido.setText(palabraTraducida);
+    public void updateTexto() {
+        etiquetaTextoTraducido.setText(modelo.getWord());
     }
 }

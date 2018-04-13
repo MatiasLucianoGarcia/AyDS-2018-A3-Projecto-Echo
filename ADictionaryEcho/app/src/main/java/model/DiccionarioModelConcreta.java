@@ -12,6 +12,8 @@ import retrofit2.Response;
 
 public class DiccionarioModelConcreta implements DiccionarioModel {
 
+    private String translatedWord;
+
     public DiccionarioModelConcreta() {}
 
     public void guardarTermino(String term, String sig) {
@@ -63,4 +65,9 @@ public class DiccionarioModelConcreta implements DiccionarioModel {
             }
         });
     }
+    
+    public String getWotd(){
+        return translatedWord;
+    }
+    
 }
