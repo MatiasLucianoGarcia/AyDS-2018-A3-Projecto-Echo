@@ -1,17 +1,12 @@
 package model;
 
 import android.text.Html;
-import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-import java.io.IOException;
-
-import model.service.ConexionAPIConcretaYandex;
+import model.service.YandexApiConnection;
 import model.service.TranslatorService;
 import model.service.TranslatorServiceImpl;
-import retrofit2.Response;
 
 /**
  * Created by tomas on 13/4/2018.
@@ -45,8 +40,10 @@ public class TranslatorModelConcrete2 implements TranslatorModel {
     }
 
     private void findTranslationOnline() {
-        translatorService = new TranslatorServiceImpl(new ConexionAPIConcretaYandex().getYandex(),new Gson());
+        //TODO Dependencias en el modulo
+        translatorService = new TranslatorServiceImpl(new YandexApiConnection().getYandex(),new Gson());
         String extract = translatorService.callCreateUserService(term);
+        //TODO Codigo de la vista
         translatedWord = extract.replace("\\n", "<br>");
         translatedWord = textToHtml(translatedWord, term);
 

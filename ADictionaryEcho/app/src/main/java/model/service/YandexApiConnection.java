@@ -3,7 +3,7 @@ package model.service;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class ConexionAPIConcretaYandex implements ConexionAPIInterface {
+public class YandexApiConnection {
 
     protected Retrofit retrofit;
 

@@ -27,6 +27,7 @@ public class TranslatorServiceImpl implements TranslatorService {
         return createTranslatorResult(json);
     }
 
+    //TODO Mandar codigo a otra clase
     private String createTranslatorResult(String json) {
         JsonObject result = null;
         if (json != null) {

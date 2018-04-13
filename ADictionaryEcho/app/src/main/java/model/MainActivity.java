@@ -15,7 +15,7 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 
 import ayds.dictionary.echo.R;
-import model.service.ConexionAPIConcretaYandex;
+import model.service.YandexApiConnection;
 import model.service.YandexAPI;
 import retrofit2.Response;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     final YandexAPI wikiAPI = retrofit.create(YandexAPI.class);*/
 
-    ConexionAPIConcretaYandex conexionAPI = new ConexionAPIConcretaYandex();
+    YandexApiConnection conexionAPI = new YandexApiConnection();
     conexionAPI.conectarAPI();
     final YandexAPI yandex = conexionAPI.getYandex();
 

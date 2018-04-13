@@ -31,6 +31,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         super.onCreate(savedInstanceState);
 
         initGraphic();
+        //TODO elegir otro nombre
         initArchitecture();
         initListener();
 
