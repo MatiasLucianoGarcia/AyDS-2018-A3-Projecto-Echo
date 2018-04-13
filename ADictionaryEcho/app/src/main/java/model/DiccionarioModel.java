@@ -2,7 +2,8 @@ package model;
 
 public interface DiccionarioModel {
 
-    public void guardarTermino(String term, String sig);
+    void guardarTermino(String term, String sig);
+    void setListener(TraductorModelListener listener);
+    String getWord();
 
-    public String retornarSignificado(String term);
 }
