@@ -13,14 +13,11 @@ import retrofit2.Response;
 public class DiccionarioModelConcreta implements DiccionarioModel {
 
     private String translatedWord;
+    private TraductorModelListener listener;
 
     public DiccionarioModelConcreta() {}
 
-    public void guardarTermino(String term, String sig) {
-        DataBase.saveTerm(term,sig);
-    }
-
-    public String retornarSignificado(String term) {
+    public void translateWord(String term) {
         String text = DataBase.getMeaning(term);
 
         if (text != null) { // exists in db
@@ -66,8 +63,12 @@ public class DiccionarioModelConcreta implements DiccionarioModel {
         });
     }
     
-    public String getWotd(){
+    public String getWord(){
         return translatedWord;
     }
-    
+
+    @Override
+    public void setListener(TraductorModelListener listener) {
+        this.listener = listener;
+    }
 }

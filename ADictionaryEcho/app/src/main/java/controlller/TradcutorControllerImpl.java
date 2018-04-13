@@ -16,12 +16,8 @@ public class TradcutorControllerImpl implements TraductorController {
     }
 
     @Override
-    public void onEventUpdate(String textoATraducir) {
-        String sig = model.retornarSignificado(textoATraducir);
+    public void onEventUpdate(String textToTranslate) {
+        model.translateWord(textToTranslate);
     }
 
-    @Override
-    public void setEditUserView(VistaDiccionario editUserView) {
-
-    }
 }
