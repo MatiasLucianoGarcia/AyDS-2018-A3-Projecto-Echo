@@ -24,10 +24,10 @@ public class TranslatorServiceImpl implements TranslatorService {
             e.printStackTrace();
         }
         String json = callResponse.body();
-        return String(json);
+        return createTranslatorResult(json);
     }
 
-    private String createUserResult(String json) {
+    private String createTranslatorResult(String json) {
         JsonObject result = null;
         if (json != null) {
 
