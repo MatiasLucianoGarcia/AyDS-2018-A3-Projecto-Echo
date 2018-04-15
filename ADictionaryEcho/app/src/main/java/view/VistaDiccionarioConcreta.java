@@ -83,6 +83,6 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
             }
         });*/
         translatedWord = "<b>"+ translatedWord +"</b>";
-        etiquetaTextoTraducido.setText(translatedWord);
+        etiquetaTextoTraducido.setText(Html.fromHtml(translatedWord));
     }
 }
