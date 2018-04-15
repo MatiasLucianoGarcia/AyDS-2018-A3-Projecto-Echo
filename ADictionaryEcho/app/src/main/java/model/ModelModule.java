@@ -10,6 +10,7 @@ import model.service.YandexApiConnection;
 public class ModelModule {
 
     private static ModelModule instance;
+    private TranslatorModel translatorModel;
 
     private ModelModule() {
 
@@ -22,11 +23,15 @@ public class ModelModule {
         return instance;
     }
 
-    public TranslatorModel getDiccionarioModel(Context context) {
+    public void initTranslatorModel(Context context){
         DataBase database = DataBase.getInstance();
         database.createNewDatabase(context);
         YandexApiConnection apiConnection = new YandexApiConnection();
         apiConnection.conectarAPI();
-        return new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), database);
+        translatorModel = new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), database);
+    }
+
+    public TranslatorModel getTranslatorModel() {
+        return translatorModel;
     }
 }

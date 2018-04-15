@@ -16,6 +16,6 @@ public class ControllerModule {
     }
 
     public TranslatorController getTraductorController() {
-        return new TranslatorControllerImpl( ModelModule.getInstance().getDiccionarioModel());
+        return new TranslatorControllerImpl( ModelModule.getInstance().getTranslatorModel());
     }
 }
