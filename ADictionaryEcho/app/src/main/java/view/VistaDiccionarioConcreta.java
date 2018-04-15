@@ -31,13 +31,12 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         super.onCreate(savedInstanceState);
 
         initGraphic();
-        //TODO elegir otro nombre
-        initArchitecture();
+        initModules();
         initListener();
 
     }
 
-    private void initArchitecture(){
+    private void initModules(){
         controlador= ControllerModule.getInstance().getTraductorController();
         modelo = ModelModule.getInstance().getDiccionarioModel();
     }
