@@ -10,24 +10,20 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
-import model.ConvertidorAHTML;
-import model.ConvertidorFormato;
+import model.ConverterToHTML;
+import model.FormatConverter;
 import model.TranslatorModel;
 import model.ModelModule;
 import model.TranslatorModelListener;
 import controller.ControllerModule;
 
-/**
- * Created by tomas on 11/4/2018.
- */
-
 public class TranslatorViewImpl extends AppCompatActivity implements TranslatorView {
 
-    private EditText textFieldFWordToTranslate;
+    private EditText textFieldForTranslatingWord;
     private Button buttonForTranslating;
-    private TextView labelTranslatedText;
+    private TextView labelTranslatedWord;
 
-    private FromatConverter convertidorFormato;
+    private FormatConverter convertidorFormato;
 
     private TranslatorController controlador;
     private TranslatorModel modelo;
@@ -51,9 +47,9 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
     private void initGraphic(){
 
         setContentView(R.layout.activity_main);
-        textFieldFWordToTranslate = findViewById(R.id.textField1);
+        textFieldForTranslatingWord = findViewById(R.id.textField1);
         buttonForTranslating = findViewById(R.id.goButton);
-        labelTranslatedText = findViewById(R.id.textPane1);
+        labelTranslatedWord = findViewById(R.id.textPane1);
 
     }
 
@@ -61,7 +57,7 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         buttonForTranslating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlador.onEventUpdate(textFieldFWordToTranslate.getText().toString());
+                controlador.onEventUpdate(textFieldForTranslatingWord.getText().toString());
             }
         });
         modelo.setListener(new TranslatorModelListener() {
@@ -84,10 +80,10 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         });*/
         translatedWord = "<b>"+ translatedWord +"</b>";
         final String wordToShow = translatedWord;
-        labelTranslatedText.post(new Runnable() {
+        labelTranslatedWord.post(new Runnable() {
             @Override
             public void run() {
-                labelTranslatedText.setText(Html.fromHtml(wordToShow));
+                labelTranslatedWord.setText(Html.fromHtml(wordToShow));
             }
         });
     }
