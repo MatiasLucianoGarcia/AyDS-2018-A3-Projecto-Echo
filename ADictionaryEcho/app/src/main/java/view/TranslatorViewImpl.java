@@ -69,6 +69,7 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
 
 
     @Override
+    //TODO Preguntar si debemos sacar separar el updateTexto a un ViewModule y acomodar este metodo
     public void updateTexto(String translatedWord) {
         translatedWord = translatedWord.replace("\\n", "<br>");
       /*  translatedWord = convertidorFormato.formatTo(translatedWord, term);
