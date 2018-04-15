@@ -14,18 +14,23 @@ public class TranslatorModelConcrete implements TranslatorModel {
         this.translatorService = service;
     }
 
-    public void translateWord(String wordToTranslate) {
-        String translatedWord = externalStorage.getMeaning(wordToTranslate);
+    public void translateWord(final String wordToTranslate) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String translatedWord = externalStorage.getMeaning(wordToTranslate);
 
-        if (translatedWord != null) {
-            translatedWord = "[*]" + translatedWord;
-        }
-        else {
-            translatedWord = findTranslationOnline(wordToTranslate);
-            externalStorage.saveTerm(wordToTranslate, translatedWord);
-        }
+                if (translatedWord != null) {
+                    translatedWord = "[*]" + translatedWord;
+                }
+                else {
+                    translatedWord = findTranslationOnline(wordToTranslate);
+                    externalStorage.saveTerm(wordToTranslate, translatedWord);
+                }
 
-        listener.didUpdateWord(translatedWord);
+                listener.didUpdateWord(translatedWord);
+            }
+        }).start();
     }
 
     private String findTranslationOnline(String term) {
