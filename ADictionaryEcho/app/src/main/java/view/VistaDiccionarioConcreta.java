@@ -2,6 +2,7 @@ package view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,15 +59,23 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
             }
         });
         modelo.setListener(new TranslatorModelListener() {
-            @Override public void didUpdateWord() {
-                updateTexto();
+            @Override public void didUpdateWord(String translatedWord) {
+                updateTexto(translatedWord);
             }
         });
     }
 
 
     @Override
-    public void updateTexto() {
-        etiquetaTextoTraducido.setText(modelo.getWord());
+    public void updateTexto(String translatedWord) {
+        translatedWord = extract.replace("\\n", "<br>");
+        translatedWord = textToHtml(translatedWord, term);
+        final String textToSet = translatedWord;
+        textPane1.post(new Runnable() {
+            public void run() {
+                textPane1.setText(Html.fromHtml(textToSet));
+            }
+        });
+        etiquetaTextoTraducido.setText(translatedWord);
     }
 }

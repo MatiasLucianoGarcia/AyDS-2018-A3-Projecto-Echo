@@ -1,12 +1,17 @@
 package model;
 
+import com.google.gson.Gson;
+
+import model.service.TranslatorServiceImpl;
+import model.service.YandexApiConnection;
+
 public class ModelModule {
 
     private static ModelModule instance;
     private TranslatorModel dicModel;
 
     private ModelModule() {
-        dicModel =  new TranslatorModelConcrete();
+        dicModel =  new TranslatorModelConcrete2(new TranslatorServiceImpl(new YandexApiConnection().getYandex(),new Gson()));
     }
 
     public static ModelModule getInstance() {

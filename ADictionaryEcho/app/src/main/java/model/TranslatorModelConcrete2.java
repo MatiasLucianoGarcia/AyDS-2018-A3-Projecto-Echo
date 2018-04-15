@@ -18,7 +18,9 @@ public class TranslatorModelConcrete2 implements TranslatorModel {
     private TranslatorModelListener listener;
     private TranslatorService translatorService;
 
-    public TranslatorModelConcrete2() {}
+    public TranslatorModelConcrete2(TranslatorService service) {
+        translatorService = service;
+    }
 
     public void translateWord(String term) {
         translatedWord = DataBase.getMeaning(term);
@@ -28,25 +30,12 @@ public class TranslatorModelConcrete2 implements TranslatorModel {
             translatedWord = "[*]" + translatedWord;
         }
         else {
-            findTranslationOnline();
+            findTranslationOnline(term);
         }
-
-        final String textToSet = translatedWord;
-        textPane1.post(new Runnable() {
-            public void run() {
-                textPane1.setText(Html.fromHtml(textToSet));
-            }
-        });
     }
 
-    private void findTranslationOnline() {
-        //TODO Dependencias en el modulo
-        translatorService = new TranslatorServiceImpl(new YandexApiConnection().getYandex(),new Gson());
+    private void findTranslationOnline(String term) {
         String extract = translatorService.callCreateUserService(term);
-        //TODO Codigo de la vista
-        translatedWord = extract.replace("\\n", "<br>");
-        translatedWord = textToHtml(translatedWord, term);
-
         DataBase.saveTerm(textField1.getText().toString(), translatedWord);
     }
 

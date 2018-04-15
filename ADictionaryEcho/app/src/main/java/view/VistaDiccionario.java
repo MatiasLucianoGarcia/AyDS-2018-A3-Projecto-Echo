@@ -5,5 +5,5 @@ package view;
  */
 
 public interface VistaDiccionario {
-    void updateTexto();
+    void updateTexto(String translatedWord);
 }

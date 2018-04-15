@@ -5,5 +5,5 @@ package model;
  */
 
 public interface TranslatorModelListener {
-    void didUpdateWord();
+    void didUpdateWord(String translatedWord);
 }
