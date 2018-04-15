@@ -8,15 +8,14 @@ import java.util.List;
 
 import model.room.*;
 
-//TODO Hacer la base de datos singleton y refacotrear el codigo donde se usa
 public class DataBase  implements StorageInterface{
 
-  private DataBase instance;
+  private static DataBase instance;
   private static ConceptDataBase db;
 
   private DataBase() {}
 
-  public DataBase getInstance()
+  public static DataBase getInstance()
   {
     if (instance == null) {
       instance = new DataBase();

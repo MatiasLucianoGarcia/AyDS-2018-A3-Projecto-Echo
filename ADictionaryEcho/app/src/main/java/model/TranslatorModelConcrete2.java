@@ -1,47 +1,35 @@
 package model;
 
-import android.text.Html;
-
-import com.google.gson.Gson;
-
-import model.service.YandexApiConnection;
 import model.service.TranslatorService;
-import model.service.TranslatorServiceImpl;
 
-/**
- * Created by tomas on 13/4/2018.
- */
 
 public class TranslatorModelConcrete2 implements TranslatorModel {
 
-    private String translatedWord;
     private TranslatorModelListener listener;
     private TranslatorService translatorService;
+    private StorageInterface externalStorage;
 
-    public TranslatorModelConcrete2(TranslatorService service) {
-        translatorService = service;
+    public TranslatorModelConcrete2(TranslatorService service, StorageInterface externalStorage) {
+        this.externalStorage = externalStorage;
+        this.translatorService = service;
     }
 
-    public void translateWord(String term) {
-        translatedWord = DataBase.getMeaning(term);
+    public void translateWord(String wordToTranslate) {
+        String translatedWord = externalStorage.getMeaning(wordToTranslate);
 
         if (translatedWord != null) {
-
             translatedWord = "[*]" + translatedWord;
         }
         else {
-            findTranslationOnline(term);
+            translatedWord = findTranslationOnline(wordToTranslate);
+            externalStorage.saveTerm(wordToTranslate, translatedWord);
         }
+
+        listener.didUpdateWord(translatedWord);
     }
 
-    private void findTranslationOnline(String term) {
-        String extract = translatorService.callCreateUserService(term);
-        DataBase.saveTerm(textField1.getText().toString(), translatedWord);
-    }
-
-
-    public String getWord(){
-        return translatedWord;
+    private String findTranslationOnline(String term) {
+        return translatorService.callCreateTranslatedWord(term);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package model;
 
+import android.arch.persistence.room.Database;
+
 import com.google.gson.Gson;
 
 import model.service.TranslatorServiceImpl;
@@ -11,7 +13,7 @@ public class ModelModule {
     private TranslatorModel dicModel;
 
     private ModelModule() {
-        dicModel =  new TranslatorModelConcrete2(new TranslatorServiceImpl(new YandexApiConnection().getYandex(),new Gson()));
+        dicModel =  new TranslatorModelConcrete2(new TranslatorServiceImpl(new YandexApiConnection().getYandex(),new Gson()), DataBase.getInstance());
     }
 
     public static ModelModule getInstance() {

@@ -16,10 +16,10 @@ public class TranslatorServiceImpl implements TranslatorService {
         this.gson = gson;
     }
 
-    public String callCreateUserService(String word) {
+    public String callCreateTranslatedWord(String wordToTranslate) {
         Response<String> callResponse=null;
         try {
-            callResponse = service.getTerm(word).execute();
+            callResponse = service.getTerm(wordToTranslate).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
