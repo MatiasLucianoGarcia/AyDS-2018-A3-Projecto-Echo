@@ -44,7 +44,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
 
     private void initModules(){
         controlador= ControllerModule.getInstance().getTraductorController();
-        modelo = ModelModule.getInstance().getDiccionarioModel();
+        modelo = ModelModule.getInstance().getDiccionarioModel(getApplicationContext());
     }
 
     private void initGraphic(){

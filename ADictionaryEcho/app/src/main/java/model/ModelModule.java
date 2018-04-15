@@ -1,21 +1,18 @@
 package model;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 
 import model.service.TranslatorServiceImpl;
-import model.service.YandexAPI;
 import model.service.YandexApiConnection;
 
 public class ModelModule {
 
     private static ModelModule instance;
-    private TranslatorModel dicModel;
-    private YandexApiConnection apiConnection;
 
     private ModelModule() {
-        apiConnection = new YandexApiConnection();
-        apiConnection.conectarAPI();
-        dicModel =  new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), DataBase.getInstance());
+
     }
 
     public static ModelModule getInstance() {
@@ -25,7 +22,11 @@ public class ModelModule {
         return instance;
     }
 
-    public TranslatorModel getDiccionarioModel() {
-        return dicModel;
+    public TranslatorModel getDiccionarioModel(Context context) {
+        DataBase database = DataBase.getInstance();
+        database.createNewDatabase(context);
+        YandexApiConnection apiConnection = new YandexApiConnection();
+        apiConnection.conectarAPI();
+        return new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), database);
     }
 }
