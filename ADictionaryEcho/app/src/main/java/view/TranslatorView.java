@@ -5,5 +5,5 @@ package view;
  */
 
 public interface TranslatorView {
-    void updateTexto(String translatedWord);
+    void updateText(String translatedWord);
 }

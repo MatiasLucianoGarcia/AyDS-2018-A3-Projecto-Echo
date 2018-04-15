@@ -2,8 +2,7 @@ package model;
 
 import android.content.Context;
 
-public interface StorageInterface {
-
+public interface Storage {
 
     void createNewDatabase(Context context);
 

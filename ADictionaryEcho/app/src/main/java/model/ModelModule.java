@@ -12,7 +12,6 @@ public class ModelModule {
 
     private static ModelModule instance;
     private TranslatorModel translatorModel;
-    private Context contexto;
 
     private ModelModule() {
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 import model.room.*;
 
-public class DataBase  implements StorageInterface{
+public class DataBase  implements Storage {
 
   private static DataBase instance;
   private static ConceptDataBase db;
@@ -29,26 +29,12 @@ public class DataBase  implements StorageInterface{
                               ConceptDataBase.class, "dictionary.db").build();
   }
 
-  public void testDB() {
-
-    List<Concept> concepts = db.termDao().getAll();
-
-    for (Concept concept :
-        concepts) {
-      Log.e("**", "id =" + concept.getId());
-      Log.e("**", "term =" + concept.getTerm());
-      Log.e("**", "meaning =" + concept.getMeaning());
-      Log.e("**", "source =" + concept.getSource());
-
-    }
-  }
-
   public void saveTerm(String term, String meaning) {
-    Concept concept =  new Concept();
-    concept.setTerm(term);
-    concept.setMeaning(meaning);
-    concept.setSource(1);
-    db.termDao().insert(concept);
+      Concept concept =  new Concept();
+      concept.setTerm(term);
+      concept.setMeaning(meaning);
+      concept.setSource(1);
+      db.termDao().insert(concept);
   }
 
   public  String getMeaning(String term) {

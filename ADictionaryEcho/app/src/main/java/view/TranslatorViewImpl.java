@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
-import model.ConverterToHTML;
-import model.FormatConverter;
 import model.TranslatorModel;
 import model.ModelModule;
 import model.TranslatorModelListener;
@@ -23,7 +21,7 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
     private Button buttonForTranslating;
     private TextView labelTranslatedWord;
 
-    private FormatConverter convertidorFormato;
+    private FormatConverter formatConverter;
 
     private TranslatorController controlador;
     private TranslatorModel modelo;
@@ -32,7 +30,7 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         super.onCreate(savedInstanceState);
 
         initGraphic();
-        convertidorFormato = new ConverterToHTML();
+        formatConverter = new ConverterToHTML();
         initModules();
         initListener();
 
@@ -62,14 +60,14 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         });
         modelo.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord(String translatedWord) {
-                updateTexto(translatedWord);
+                updateText(translatedWord);
             }
         });
     }
 
 
     @Override
-    public void updateTexto(String translatedWord) {
+    public void updateText(String translatedWord) {
         translatedWord = translatedWord.replace("\\n", "<br>");
       /*  translatedWord = convertidorFormato.formatTo(translatedWord, term);
         final String textToSet = translatedWord;

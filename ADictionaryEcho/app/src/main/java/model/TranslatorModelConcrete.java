@@ -7,9 +7,9 @@ public class TranslatorModelConcrete implements TranslatorModel {
 
     private TranslatorModelListener listener;
     private TranslatorService translatorService;
-    private StorageInterface externalStorage;
+    private Storage externalStorage;
 
-    public TranslatorModelConcrete(TranslatorService service, StorageInterface externalStorage) {
+    public TranslatorModelConcrete(TranslatorService service, Storage externalStorage) {
         this.externalStorage = externalStorage;
         this.translatorService = service;
     }
