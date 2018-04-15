@@ -3,15 +3,19 @@ package model;
 import com.google.gson.Gson;
 
 import model.service.TranslatorServiceImpl;
+import model.service.YandexAPI;
 import model.service.YandexApiConnection;
 
 public class ModelModule {
 
     private static ModelModule instance;
     private TranslatorModel dicModel;
+    private YandexApiConnection apiConnection;
 
     private ModelModule() {
-        dicModel =  new TranslatorModelConcrete(new TranslatorServiceImpl(new YandexApiConnection().getYandex(),new Gson()), DataBase.getInstance());
+        apiConnection = new YandexApiConnection();
+        apiConnection.conectarAPI();
+        dicModel =  new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), DataBase.getInstance());
     }
 
     public static ModelModule getInstance() {
