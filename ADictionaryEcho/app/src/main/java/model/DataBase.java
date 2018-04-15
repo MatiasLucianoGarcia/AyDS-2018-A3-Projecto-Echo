@@ -8,7 +8,6 @@ import java.util.List;
 
 import model.room.*;
 
-//TODO Hacer la base de datos singleton y refacotrear el codigo donde se usa
 public class DataBase  implements StorageInterface{
 
   private DataBase instance;
