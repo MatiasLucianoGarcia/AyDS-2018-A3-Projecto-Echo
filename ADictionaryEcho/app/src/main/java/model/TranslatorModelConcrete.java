@@ -1,70 +1,35 @@
 package model;
 
-import android.text.Html;
-import android.util.Log;
+import model.service.TranslatorService;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
-
-import retrofit2.Response;
 
 public class TranslatorModelConcrete implements TranslatorModel {
 
-    private String translatedWord;
     private TranslatorModelListener listener;
+    private TranslatorService translatorService;
+    private StorageInterface externalStorage;
 
-    public TranslatorModelConcrete() {}
+    public TranslatorModelConcrete(TranslatorService service, StorageInterface externalStorage) {
+        this.externalStorage = externalStorage;
+        this.translatorService = service;
+    }
 
-    public void translateWord(String term) {
-        String text = DataBase.getMeaning(term);
+    public void translateWord(String wordToTranslate) {
+        String translatedWord = externalStorage.getMeaning(wordToTranslate);
 
-        if (text != null) { // exists in db
-
-            text = "[*]" + text;
+        if (translatedWord != null) {
+            translatedWord = "[*]" + translatedWord;
         }
         else {
-            Response<String> callResponse;
-            try {
-                callResponse = yandex.getTerm(term).execute();
-
-                Log.e("**","JSON " + callResponse.body());
-
-
-                if (callResponse.body() == null) {
-                    text = "No Results";
-                } else {
-
-
-                    Gson gson = new Gson();
-                    JsonObject jobj = gson.fromJson(callResponse.body(), JsonObject.class);
-
-                    // nouns
-                    String extract = jobj.get("text").getAsString();
-
-                    text = extract.replace("\\n", "<br>");
-                    text = textToHtml(text, term);
-
-                    // save to DB  <o/
-                    DataBase.saveTerm(textField1.getText().toString(), text);
-                }
-
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            translatedWord = findTranslationOnline(wordToTranslate);
+            externalStorage.saveTerm(wordToTranslate, translatedWord);
         }
 
-        final String textToSet = text;
-        textPane1.post(new Runnable() {
-            public void run() {
-                textPane1.setText(Html.fromHtml(textToSet));
-            }
-        });
+        listener.didUpdateWord(translatedWord);
     }
-    
-    public String getWord(){
-        return translatedWord;
+
+    private String findTranslationOnline(String term) {
+        return translatorService.callCreateTranslatedWord(term);
     }
 
     @Override
