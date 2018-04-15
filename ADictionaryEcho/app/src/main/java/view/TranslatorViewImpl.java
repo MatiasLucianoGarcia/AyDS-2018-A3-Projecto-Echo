@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
-import model.ConverterToHTML;
-import model.FormatConverter;
+import view.ConverterToHTML;
+import view.FormatConverter;
 import model.TranslatorModel;
 import model.ModelModule;
 import model.TranslatorModelListener;
