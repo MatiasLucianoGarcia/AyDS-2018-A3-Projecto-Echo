@@ -11,15 +11,26 @@ import model.room.*;
 //TODO Hacer la base de datos singleton y refacotrear el codigo donde se usa
 public class DataBase  implements StorageInterface{
 
+  private DataBase instance;
   private static ConceptDataBase db;
 
+  private DataBase() {}
+
+  public DataBase getInstance()
+  {
+    if (instance == null) {
+      instance = new DataBase();
+    }
+    return instance;
+
+  }
 
   public  void createNewDatabase(Context context) {
     db = Room.databaseBuilder(context,
                               ConceptDataBase.class, "dictionary.db").build();
   }
 
-  public static void testDB() {
+  public void testDB() {
 
     List<Concept> concepts = db.termDao().getAll();
 
