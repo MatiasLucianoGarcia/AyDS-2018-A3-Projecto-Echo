@@ -21,13 +21,13 @@ import controller.ControllerModule;
  * Created by tomas on 11/4/2018.
  */
 
-public class VistaDiccionarioConcreta extends AppCompatActivity implements VistaDiccionario {
+public class TranslatorViewImpl extends AppCompatActivity implements TranslatorView {
 
-    private EditText textFieldIngresoPalabra;
-    private Button botonTraductor;
-    private TextView etiquetaTextoTraducido;
+    private EditText textFieldFWordToTranslate;
+    private Button buttonForTranslating;
+    private TextView labelTranslatedText;
 
-    private ConvertidorFormato convertidorFormato;
+    private FromatConverter convertidorFormato;
 
     private TranslatorController controlador;
     private TranslatorModel modelo;
@@ -36,7 +36,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         super.onCreate(savedInstanceState);
 
         initGraphic();
-        convertidorFormato = new ConvertidorAHTML();
+        convertidorFormato = new ConverterToHTML();
         initModules();
         initListener();
 
@@ -51,17 +51,17 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
     private void initGraphic(){
 
         setContentView(R.layout.activity_main);
-        textFieldIngresoPalabra = findViewById(R.id.textField1);
-        botonTraductor = findViewById(R.id.goButton);
-        etiquetaTextoTraducido = findViewById(R.id.textPane1);
+        textFieldFWordToTranslate = findViewById(R.id.textField1);
+        buttonForTranslating = findViewById(R.id.goButton);
+        labelTranslatedText = findViewById(R.id.textPane1);
 
     }
 
     private void initListener(){
-        botonTraductor.setOnClickListener(new View.OnClickListener() {
+        buttonForTranslating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlador.onEventUpdate(textFieldIngresoPalabra.getText().toString());
+                controlador.onEventUpdate(textFieldFWordToTranslate.getText().toString());
             }
         });
         modelo.setListener(new TranslatorModelListener() {
@@ -84,10 +84,10 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         });*/
         translatedWord = "<b>"+ translatedWord +"</b>";
         final String wordToShow = translatedWord;
-        etiquetaTextoTraducido.post(new Runnable() {
+        labelTranslatedText.post(new Runnable() {
             @Override
             public void run() {
-                etiquetaTextoTraducido.setText(Html.fromHtml(wordToShow));
+                labelTranslatedText.setText(Html.fromHtml(wordToShow));
             }
         });
     }
