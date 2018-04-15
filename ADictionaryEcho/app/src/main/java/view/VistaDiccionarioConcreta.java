@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
+import model.ConvertidorAHTML;
+import model.ConvertidorFormato;
 import model.TranslatorModel;
 import model.ModelModule;
 import model.TranslatorModelListener;
@@ -25,6 +27,8 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
     private Button botonTraductor;
     private TextView etiquetaTextoTraducido;
 
+    private ConvertidorFormato convertidorFormato;
+
     private TranslatorController controlador;
     private TranslatorModel modelo;
 
@@ -32,6 +36,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
         super.onCreate(savedInstanceState);
 
         initGraphic();
+        convertidorFormato = new ConvertidorAHTML();
         initModules();
         initListener();
 
@@ -69,7 +74,7 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
     @Override
     public void updateTexto(String translatedWord) {
         translatedWord = extract.replace("\\n", "<br>");
-        translatedWord = textToHtml(translatedWord, term);
+        translatedWord = convertidorFormato.formatTo(translatedWord, term);
         final String textToSet = translatedWord;
         textPane1.post(new Runnable() {
             public void run() {
