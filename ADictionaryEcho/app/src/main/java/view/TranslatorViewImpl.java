@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
+import model.ConverterToHTML;
+import model.FormatConverter;
 import model.TranslatorModel;
 import model.ModelModule;
 import model.TranslatorModelListener;
@@ -21,7 +23,7 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
     private Button buttonForTranslating;
     private TextView labelTranslatedWord;
 
-    private FormatConverter formatConverter;
+    private FormatConverter convertidorFormato;
 
     private TranslatorController controlador;
     private TranslatorModel modelo;
@@ -30,7 +32,7 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         super.onCreate(savedInstanceState);
 
         initGraphic();
-        formatConverter = new ConverterToHTML();
+        convertidorFormato = new ConverterToHTML();
         initModules();
         initListener();
 
@@ -60,14 +62,15 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         });
         modelo.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord(String translatedWord) {
-                updateText(translatedWord);
+                updateTexto(translatedWord);
             }
         });
     }
 
 
     @Override
-    public void updateText(String translatedWord) {
+    //TODO Preguntar si debemos sacar separar el updateTexto a un ViewModule y acomodar este metodo
+    public void updateTexto(String translatedWord) {
         translatedWord = translatedWord.replace("\\n", "<br>");
       /*  translatedWord = convertidorFormato.formatTo(translatedWord, term);
         final String textToSet = translatedWord;
