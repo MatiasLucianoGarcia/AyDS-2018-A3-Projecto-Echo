@@ -1,6 +1,7 @@
 package model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -11,6 +12,7 @@ public class ModelModule {
 
     private static ModelModule instance;
     private TranslatorModel translatorModel;
+    private Context contexto;
 
     private ModelModule() {
 
@@ -23,12 +25,20 @@ public class ModelModule {
         return instance;
     }
 
-    public void initTranslatorModel(Context context){
-        DataBase database = DataBase.getInstance();
-        database.createNewDatabase(context);
+    public void initTranslatorModel(final Context applicationContext){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataBase.getInstance().createNewDatabase(applicationContext);
+                DataBase.getInstance().saveTerm("test", "sarasa");
+                Log.e("**", "" + DataBase.getInstance().getMeaning("test"));
+                Log.e("**", "" + DataBase.getInstance().getMeaning("nada"));
+            }
+        }).start();
         YandexApiConnection apiConnection = new YandexApiConnection();
         apiConnection.conectarAPI();
-        translatorModel = new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), database);
+        translatorModel = new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), DataBase.getInstance());
+
     }
 
     public TranslatorModel getTranslatorModel() {
