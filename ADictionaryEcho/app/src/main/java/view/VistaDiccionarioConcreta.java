@@ -73,14 +73,15 @@ public class VistaDiccionarioConcreta extends AppCompatActivity implements Vista
 
     @Override
     public void updateTexto(String translatedWord) {
-        translatedWord = extract.replace("\\n", "<br>");
-        translatedWord = convertidorFormato.formatTo(translatedWord, term);
+        translatedWord = translatedWord.replace("\\n", "<br>");
+      /*  translatedWord = convertidorFormato.formatTo(translatedWord, term);
         final String textToSet = translatedWord;
         textPane1.post(new Runnable() {
             public void run() {
                 textPane1.setText(Html.fromHtml(textToSet));
             }
-        });
+        });*/
+        translatedWord = "<b>"+ translatedWord +"</b>";
         etiquetaTextoTraducido.setText(translatedWord);
     }
 }
