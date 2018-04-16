@@ -1,12 +1,14 @@
 package model;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
+import model.service.JsonToStringConverter;
+import model.service.ResultConverter;
 import model.service.TranslatorServiceImpl;
 import model.service.YandexApiConnection;
+import model.storage.DataBase;
 
 public class ModelModule {
 
@@ -29,14 +31,16 @@ public class ModelModule {
             @Override
             public void run() {
                 DataBase.getInstance().createNewDatabase(applicationContext);
-                DataBase.getInstance().saveTerm("test", "sarasa");
-                Log.e("**", "" + DataBase.getInstance().getMeaning("test"));
-                Log.e("**", "" + DataBase.getInstance().getMeaning("nada"));
             }
         }).start();
+
         YandexApiConnection apiConnection = new YandexApiConnection();
-        apiConnection.conectarAPI();
-        translatorModel = new TranslatorModelConcrete(new TranslatorServiceImpl(apiConnection.getYandex(),new Gson()), DataBase.getInstance());
+        apiConnection.connectAPI();
+
+        ResultConverter resultConverter = new JsonToStringConverter(new Gson());
+
+        Repository repository = new RepositoryImpl(DataBase.getInstance(),new TranslatorServiceImpl(apiConnection.getYandex(),resultConverter));
+        translatorModel = new TranslatorModelImpl(repository);
 
     }
 

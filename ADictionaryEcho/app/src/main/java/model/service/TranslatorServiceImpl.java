@@ -1,19 +1,17 @@
 package model.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import java.io.IOException;
 
 import retrofit2.Response;
 
 public class TranslatorServiceImpl implements TranslatorService {
-    private Gson gson;
-    private YandexAPI service;
 
-    public TranslatorServiceImpl(YandexAPI service, Gson gson) {
+    private YandexAPI service;
+    private ResultConverter resultConverter;
+
+    public TranslatorServiceImpl(YandexAPI service, ResultConverter resultConverter) {
         this.service = service;
-        this.gson = gson;
+        this.resultConverter=resultConverter;
     }
 
     public String callCreateTranslatedWord(String wordToTranslate) {
@@ -23,17 +21,8 @@ public class TranslatorServiceImpl implements TranslatorService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String json = callResponse.body();
-        return createTranslatorResult(json);
+        String  resultToConvert = callResponse.body();
+        return resultConverter.createTranslatorResult(resultToConvert);
     }
 
-    //TODO Mandar codigo a otra clase
-    private String createTranslatorResult(String json) {
-        JsonObject result = null;
-        if (json != null) {
-
-            result = gson.fromJson(json, JsonObject.class);
-        }
-        return result.get("text").getAsString();
-    }
 }

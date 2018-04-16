@@ -10,38 +10,40 @@ import android.widget.TextView;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
-import view.ConverterToHTML;
-import view.FormatConverter;
 import model.TranslatorModel;
 import model.ModelModule;
 import model.TranslatorModelListener;
 import controller.ControllerModule;
 
-public class TranslatorViewImpl extends AppCompatActivity implements TranslatorView {
+public class TranslatorViewImpl extends AppCompatActivity {
 
     private EditText textFieldForTranslatingWord;
     private Button buttonForTranslating;
     private TextView labelTranslatedWord;
 
-    private FormatConverter convertidorFormato;
+    private FormatConverter formatConverter;
 
-    private TranslatorController controlador;
-    private TranslatorModel modelo;
+    private TranslatorController controller;
+    private TranslatorModel model;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initGraphic();
-        convertidorFormato = new ConverterToHTML();
+        initFromatters();
         initModules();
         initListener();
 
     }
 
+    private void initFromatters() {
+        formatConverter = new ConverterToHTMLBoldHighlighter();
+    }
+
     private void initModules(){
         ModelModule.getInstance().initTranslatorModel(getApplicationContext());
-        controlador= ControllerModule.getInstance().getTraductorController();
-        modelo = ModelModule.getInstance().getTranslatorModel();
+        controller = ControllerModule.getInstance().getTraductorController();
+        model = ModelModule.getInstance().getTranslatorModel();
     }
 
     private void initGraphic(){
@@ -57,29 +59,18 @@ public class TranslatorViewImpl extends AppCompatActivity implements TranslatorV
         buttonForTranslating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlador.onEventUpdate(textFieldForTranslatingWord.getText().toString());
+                controller.onEventUpdate(textFieldForTranslatingWord.getText().toString());
             }
         });
-        modelo.setListener(new TranslatorModelListener() {
+        model.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord(String translatedWord) {
-                updateTexto(translatedWord);
+                updateText(translatedWord);
             }
         });
     }
 
-
-    @Override
-    //TODO Preguntar si debemos sacar separar el updateTexto a un ViewModule y acomodar este metodo
-    public void updateTexto(String translatedWord) {
-        translatedWord = translatedWord.replace("\\n", "<br>");
-      /*  translatedWord = convertidorFormato.formatTo(translatedWord, term);
-        final String textToSet = translatedWord;
-        textPane1.post(new Runnable() {
-            public void run() {
-                textPane1.setText(Html.fromHtml(textToSet));
-            }
-        });*/
-        translatedWord = "<b>"+ translatedWord +"</b>";
+    private void updateText(String translatedWord) {
+        translatedWord = formatConverter.formatTo(translatedWord, labelTranslatedWord.getText().toString());
         final String wordToShow = translatedWord;
         labelTranslatedWord.post(new Runnable() {
             @Override

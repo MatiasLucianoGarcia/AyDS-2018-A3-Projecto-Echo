@@ -1,10 +1,7 @@
-package model;
+package model.storage;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.util.Log;
-
-import java.util.List;
 
 import model.room.*;
 
@@ -24,7 +21,7 @@ public class DataBase  implements Storage {
 
   }
 
-  public  void createNewDatabase(Context context) {
+  public void createNewDatabase(Context context) {
     db = Room.databaseBuilder(context,
                               ConceptDataBase.class, "dictionary.db").build();
   }
@@ -37,7 +34,7 @@ public class DataBase  implements Storage {
       db.termDao().insert(concept);
   }
 
-  public  String getMeaning(String term) {
+  public String getMeaning(String term) {
 
     Concept concept = db.termDao().findByName(term);
 

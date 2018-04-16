@@ -1,4 +1,4 @@
-package model;
+package model.storage;
 
 import android.content.Context;
 

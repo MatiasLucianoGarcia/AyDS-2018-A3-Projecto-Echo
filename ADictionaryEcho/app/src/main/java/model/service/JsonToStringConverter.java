@@ -1,0 +1,24 @@
+package model.service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+public class JsonToStringConverter implements ResultConverter {
+
+    private Gson gson;
+
+    public JsonToStringConverter(Gson gson){
+        this.gson=gson;
+
+    }
+
+    public String createTranslatorResult(String resultString){
+        JsonObject result = null;
+        if (resultString != null) {
+
+            result = gson.fromJson(resultString, JsonObject.class);
+        }
+        return result.get("text").getAsString();
+    }
+
+}

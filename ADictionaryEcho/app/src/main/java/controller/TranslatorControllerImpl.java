@@ -2,10 +2,6 @@ package controller;
 
 import model.TranslatorModel;
 
-/**
- * Created by tomas on 11/4/2018.
- */
-
 public class TranslatorControllerImpl implements TranslatorController {
 
     protected TranslatorModel model;

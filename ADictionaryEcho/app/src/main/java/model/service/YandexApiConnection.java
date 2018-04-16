@@ -7,7 +7,7 @@ public class YandexApiConnection {
 
     protected Retrofit retrofit;
 
-    public void conectarAPI() {
+    public void connectAPI() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(ServiceConfiguration.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
