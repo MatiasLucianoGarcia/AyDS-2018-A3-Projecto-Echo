@@ -30,13 +30,13 @@ public class TranslatorViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initGraphic();
-        initFromatters();
+        initFormatters();
         initModules();
         initListener();
 
     }
 
-    private void initFromatters() {
+    private void initFormatters() {
         formatConverter = new ConverterToHTMLBoldHighlighter();
     }
 
