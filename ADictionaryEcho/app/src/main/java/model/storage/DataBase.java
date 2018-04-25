@@ -7,43 +7,36 @@ import model.storage.room.*;
 
 class DataBase implements Storage {
 
-  private static DataBase instance;
-  private static ConceptDataBase db;
+    private static DataBase instance;
+    private static ConceptDataBase db;
 
-  private DataBase() {}
+    private DataBase() {}
 
-  public static DataBase getInstance()
-  {
-    if (instance == null) {
-      instance = new DataBase();
+    public static DataBase getInstance() {
+        if (instance == null) {
+            instance = new DataBase();
+        }
+        return instance;
     }
-    return instance;
 
-  }
-
-  public void createNewDatabase(Context context) {
-    db = Room.databaseBuilder(context,
-                              ConceptDataBase.class, "dictionary.db").build();
-  }
-
-  public void saveTerm(String term, String meaning) {
-      Concept concept =  new Concept();
-      concept.setTerm(term);
-      concept.setMeaning(meaning);
-      concept.setSource(1);
-      db.termDao().insert(concept);
-  }
-
-  public String getMeaning(String term) {
-
-    Concept concept = db.termDao().findByName(term);
-
-    if (concept != null) {
-      return concept.getMeaning();
+    public void createNewDatabase(Context context) {
+        db = Room.databaseBuilder(context,
+                ConceptDataBase.class, "dictionary.db").build();
     }
-    return null;
-  }
 
+    public void saveTerm(String term, String meaning) {
+        Concept concept =  new Concept();
+        concept.setTerm(term);
+        concept.setMeaning(meaning);
+        concept.setSource(1);
+        db.termDao().insert(concept);
+    }
 
-
+    public String getMeaning(String term) {
+        Concept concept = db.termDao().findByName(term);
+        if (concept != null) {
+            return concept.getMeaning();
+        }
+        return null;
+    }
 }

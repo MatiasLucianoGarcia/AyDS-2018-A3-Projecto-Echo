@@ -42,7 +42,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
 
     private void initModules(){
         ModelModule.getInstance().initTranslatorModel();
-        controller = ControllerModule.getInstance().getTraductorController();
+        controller = ControllerModule.getInstance().getTranslatorController();
         model = ModelModule.getInstance().getTranslatorModel();
     }
 

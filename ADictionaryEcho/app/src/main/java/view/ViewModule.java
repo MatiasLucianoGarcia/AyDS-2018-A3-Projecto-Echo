@@ -16,7 +16,7 @@ public class ViewModule {
         formatConverter = new ConverterToHTMLBoldHighlighter();
     }
 
-    public FormatConverter getFormatConverter(){
+    FormatConverter getFormatConverter(){
         return formatConverter;
     }
 

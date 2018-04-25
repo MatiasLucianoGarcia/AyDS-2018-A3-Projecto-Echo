@@ -32,5 +32,4 @@ public class ServiceModule {
     public TranslatorService getTranslatorService(){
         return translatorService;
     }
-
 }

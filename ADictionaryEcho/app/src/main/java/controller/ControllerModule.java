@@ -15,7 +15,7 @@ public class ControllerModule {
         return instance;
     }
 
-    public TranslatorController getTraductorController() {
+    public TranslatorController getTranslatorController() {
         return new TranslatorControllerImpl( ModelModule.getInstance().getTranslatorModel());
     }
 }

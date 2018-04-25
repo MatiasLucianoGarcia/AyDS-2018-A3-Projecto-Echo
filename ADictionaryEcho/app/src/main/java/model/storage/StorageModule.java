@@ -14,7 +14,7 @@ public class StorageModule {
         databaseInitializer();
     }
 
-    private void databaseInitializer(){
+    private void databaseInitializer() {
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -24,5 +24,4 @@ class TranslatorServiceImpl implements TranslatorService {
         String  resultToConvert = callResponse.body();
         return resultConverter.createTranslatorResult(resultToConvert);
     }
-
 }
