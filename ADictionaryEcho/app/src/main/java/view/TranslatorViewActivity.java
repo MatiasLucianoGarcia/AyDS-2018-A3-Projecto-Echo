@@ -37,7 +37,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
     }
 
     private void initFormatters() {
-        formatConverter = new ConverterToHTMLBoldHighlighter();
+        formatConverter = ViewModule.getInstance().getFormatConverter();
     }
 
     private void initModules(){
