@@ -15,7 +15,7 @@ import model.ModelModule;
 import model.TranslatorModelListener;
 import controller.ControllerModule;
 
-public class TranslatorViewImpl extends AppCompatActivity {
+public class TranslatorViewActivity extends AppCompatActivity {
 
     private EditText textFieldForTranslatingWord;
     private Button buttonForTranslating;
