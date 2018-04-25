@@ -10,9 +10,7 @@ class TranslatorControllerImpl implements TranslatorController {
         this.model = model;
     }
 
-    @Override
-    public void onEventUpdate(String textToTranslate) {
+    @Override public void onEventUpdate(String textToTranslate) {
         model.translateWord(textToTranslate);
     }
-
 }

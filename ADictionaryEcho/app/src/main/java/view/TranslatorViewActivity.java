@@ -34,7 +34,6 @@ public class TranslatorViewActivity extends AppCompatActivity {
         initFormatters();
         initModules();
         initListener();
-
     }
 
     private void initFormatters() {
@@ -48,12 +47,10 @@ public class TranslatorViewActivity extends AppCompatActivity {
     }
 
     private void initGraphic(){
-
         setContentView(R.layout.activity_main);
         textFieldForTranslatingWord = findViewById(R.id.textField1);
         buttonForTranslating = findViewById(R.id.goButton);
         labelTranslatedWord = findViewById(R.id.textPane1);
-
     }
 
     private void saveContext(){
