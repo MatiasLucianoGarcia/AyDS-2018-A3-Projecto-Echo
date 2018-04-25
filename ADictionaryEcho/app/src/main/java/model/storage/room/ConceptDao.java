@@ -1,4 +1,4 @@
-package model.room;
+package model.storage.room;
 
 import android.arch.persistence.room.*;
 

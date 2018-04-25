@@ -3,7 +3,7 @@ package model.storage;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import model.room.*;
+import model.storage.room.*;
 
 public class DataBase  implements Storage {
 
