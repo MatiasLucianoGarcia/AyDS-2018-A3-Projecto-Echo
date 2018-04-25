@@ -29,6 +29,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        saveContext();
         initGraphic();
         initFormatters();
         initModules();
@@ -41,7 +42,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
     }
 
     private void initModules(){
-        ModelModule.getInstance().initTranslatorModel(getApplicationContext());
+        ModelModule.getInstance().initTranslatorModel();
         controller = ControllerModule.getInstance().getTraductorController();
         model = ModelModule.getInstance().getTranslatorModel();
     }
@@ -53,6 +54,10 @@ public class TranslatorViewActivity extends AppCompatActivity {
         buttonForTranslating = findViewById(R.id.goButton);
         labelTranslatedWord = findViewById(R.id.textPane1);
 
+    }
+
+    private void saveContext(){
+        ViewModule.getInstance().setApplicationContext(getApplicationContext());
     }
 
     private void initListener(){

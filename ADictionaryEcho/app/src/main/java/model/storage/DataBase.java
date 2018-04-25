@@ -5,7 +5,7 @@ import android.content.Context;
 
 import model.storage.room.*;
 
-public class DataBase  implements Storage {
+class DataBase implements Storage {
 
   private static DataBase instance;
   private static ConceptDataBase db;
