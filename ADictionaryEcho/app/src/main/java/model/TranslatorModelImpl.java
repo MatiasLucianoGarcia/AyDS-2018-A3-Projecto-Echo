@@ -1,6 +1,6 @@
 package model;
 
-public class TranslatorModelImpl implements TranslatorModel {
+class TranslatorModelImpl implements TranslatorModel {
 
     private TranslatorModelListener listener;
     private Repository repository;

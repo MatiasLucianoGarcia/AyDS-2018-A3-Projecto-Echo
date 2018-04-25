@@ -3,7 +3,7 @@ package model.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-public class JsonToStringConverter implements ResultConverter {
+class JsonToStringConverter implements ResultConverter {
 
     private Gson gson;
 

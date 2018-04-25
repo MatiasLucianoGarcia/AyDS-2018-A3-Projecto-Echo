@@ -1,6 +1,6 @@
 package view;
 
-public class ConverterToHTMLBoldHighlighter implements FormatConverter {
+class ConverterToHTMLBoldHighlighter implements FormatConverter {
 
     public String formatTo(String text, String term) {
         text = text.replace("\\n", "<br>");

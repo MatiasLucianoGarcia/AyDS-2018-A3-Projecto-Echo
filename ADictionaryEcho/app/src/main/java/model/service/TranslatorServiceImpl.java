@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import retrofit2.Response;
 
-public class TranslatorServiceImpl implements TranslatorService {
+class TranslatorServiceImpl implements TranslatorService {
 
     private YandexAPI service;
     private ResultConverter resultConverter;

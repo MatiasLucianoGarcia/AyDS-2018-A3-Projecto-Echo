@@ -2,7 +2,7 @@ package controller;
 
 import model.TranslatorModel;
 
-public class TranslatorControllerImpl implements TranslatorController {
+class TranslatorControllerImpl implements TranslatorController {
 
     protected TranslatorModel model;
 
