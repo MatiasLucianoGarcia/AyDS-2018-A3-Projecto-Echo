@@ -1,32 +1,27 @@
 package model;
 
 public class Checker {
-    private static  Checker instance;
-
-    public static Checker getInstance() {
-        if (instance==null){
-            instance= new Checker();
-        }
-        return instance;
-    }
-
     private Checker() {
     }
 
-    public boolean isCorrect(String s){
-        return !(hasSpaceContinous(s)|| hasKeys(s) || hasBrackets(s));
+    public static boolean isCorrect(String s){
+        return !(hasSpaceContinous(s)|| hasKeys(s) || hasBrackets(s)|| isNull(s));
     }
 
-    private boolean hasSpaceContinous(String s){
+    private static boolean hasSpaceContinous(String s){
         return s.contains("  ");
     }
 
-    private boolean hasKeys(String s){
+    private static boolean hasKeys(String s){
         return s.contains("{") || s.contains("}");
     }
 
-    private boolean hasBrackets(String s){
+    private static boolean hasBrackets(String s){
         return s.contains("[") || s.contains("]");
+    }
+
+    private static boolean isNull(String s){
+        return (s==null) || (s=="");
     }
 }
 
