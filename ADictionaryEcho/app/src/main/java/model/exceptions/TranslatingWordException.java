@@ -1,7 +1,7 @@
 package model.exceptions;
 
-public class TranslatingWordException extends Exception {
-    public TranslatingWordException(String errorMessage) {
+public abstract class TranslatingWordException extends Exception {
+    TranslatingWordException(String errorMessage) {
         super(errorMessage);
     }
 }

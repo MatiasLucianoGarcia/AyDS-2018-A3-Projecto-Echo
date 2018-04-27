@@ -1,15 +1,16 @@
 package model;
 
-public class SpellingChecker {
+class SpellingChecker {
+
     private SpellingChecker() {
     }
 
-    public static boolean isCorrect(String s){
-        return !(hasSpaceContinous(s)|| hasKeys(s) || hasBrackets(s)|| isNull(s));
+    static boolean isCorrect(String text){
+        return !(isFullWhiteSpaces(text)|| hasKeys(text) || hasBrackets(text)|| isNull(text));
     }
 
-    private static boolean hasSpaceContinous(String s){
-        return s.contains("  ");
+    private static boolean isFullWhiteSpaces(String s){
+        return s.trim().length()==0;
     }
 
     private static boolean hasKeys(String s){
@@ -21,7 +22,7 @@ public class SpellingChecker {
     }
 
     private static boolean isNull(String s){
-        return (s==null) || (s=="");
+        return (s==null) || (s.equals(""));
     }
 }
 

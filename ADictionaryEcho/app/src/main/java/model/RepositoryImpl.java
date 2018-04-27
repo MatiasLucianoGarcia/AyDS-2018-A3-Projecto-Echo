@@ -19,7 +19,6 @@ public class RepositoryImpl implements Repository {
 
     public String translateWord(String wordToTranslate) throws TranslatingWordException {
         if(!SpellingChecker.isCorrect(wordToTranslate)) {
-            Log.d("Es correcto:",""+!SpellingChecker.isCorrect(wordToTranslate));
             throw new NonTranslatableWordException();
         }
 

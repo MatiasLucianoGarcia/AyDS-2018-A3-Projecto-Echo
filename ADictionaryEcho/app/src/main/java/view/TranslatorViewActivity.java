@@ -89,18 +89,6 @@ public class TranslatorViewActivity extends AppCompatActivity {
     private void createNewAlertDialog(String exceptionMessage) {
         Toast.makeText(TranslatorViewActivity.this, exceptionMessage,
                 Toast.LENGTH_LONG).show();
-        /*
-        AlertDialog alertDialog = new AlertDialog.Builder(TranslatorViewActivity.this).create();
-        alertDialog.setTitle("Error");
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-        */
     }
 
     private void updateText(String translatedWord) {
