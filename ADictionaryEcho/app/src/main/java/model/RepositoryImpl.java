@@ -1,5 +1,6 @@
 package model;
 
+import model.exceptions.TranslatingWordException;
 import model.service.TranslatorService;
 import model.storage.Storage;
 
@@ -13,7 +14,7 @@ public class RepositoryImpl implements Repository {
         this.translatorService = translatorService;
     }
 
-    public String translateWord(String wordToTranslate){
+    public String translateWord(String wordToTranslate) throws TranslatingWordException {
         String translatedWord = storage.getMeaning(wordToTranslate);
 
         if (translatedWord != null) {

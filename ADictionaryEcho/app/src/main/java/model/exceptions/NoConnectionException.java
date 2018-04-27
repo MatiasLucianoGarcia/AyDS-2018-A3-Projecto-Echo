@@ -1,7 +1,10 @@
 package model.exceptions;
 
 public class NoConnectionException extends TranslatingWordException {
-    public NoConnectionException(String errorMessage) {
-        super(errorMessage);
+
+    private static final String ERROR_MESSAGE = "No hay conexion a Internet";
+
+    public NoConnectionException() {
+        super(ERROR_MESSAGE);
     }
 }

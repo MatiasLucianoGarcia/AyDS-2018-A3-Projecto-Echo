@@ -2,6 +2,7 @@ package model.service;
 
 import java.io.IOException;
 
+import model.exceptions.NoConnectionException;
 import retrofit2.Response;
 
 class TranslatorServiceImpl implements TranslatorService {
@@ -11,17 +12,25 @@ class TranslatorServiceImpl implements TranslatorService {
 
     TranslatorServiceImpl(YandexAPI service, ResultConverter resultConverter) {
         this.service = service;
-        this.resultConverter=resultConverter;
+        this.resultConverter = resultConverter;
     }
 
-    public String callCreateTranslatedWord(String wordToTranslate) {
-        Response<String> callResponse=null;
+    public String callCreateTranslatedWord(String wordToTranslate) throws NoConnectionException {
+        Response<String> callResponse = null;
         try {
             callResponse = service.getTerm(wordToTranslate).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String  resultToConvert = callResponse.body();
+
+        String resultToConvert;
+        try {
+            resultToConvert = callResponse.body();
+        }
+        catch(NullPointerException exception){
+            throw new NoConnectionException();
+        }
+
         return resultConverter.createTranslatorResult(resultToConvert);
     }
 }

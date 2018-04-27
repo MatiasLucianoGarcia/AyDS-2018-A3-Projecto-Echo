@@ -1,5 +1,9 @@
 package model;
 
+import android.os.Looper;
+
+import model.exceptions.TranslatingWordException;
+
 class TranslatorModelImpl implements TranslatorModel {
 
     private TranslatorModelListener listener;
@@ -11,14 +15,20 @@ class TranslatorModelImpl implements TranslatorModel {
     }
 
     public void translateWord(final String wordToTranslate) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    String translatedWord = repository.translateWord(wordToTranslate);
-                    listener.didUpdateWord(translatedWord);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String translatedWord = null;
+                try {
+                    translatedWord = repository.translateWord(wordToTranslate);
+                } catch (TranslatingWordException e) {
+                    translatorModelExceptionListener.sendExceptionMessage(e.getMessage());
                 }
-            }).start();
+                listener.didUpdateWord(translatedWord);
+            }
+        }).start();
     }
+
     @Override
     public void setListener(TranslatorModelListener listener) {
         this.listener = listener;
