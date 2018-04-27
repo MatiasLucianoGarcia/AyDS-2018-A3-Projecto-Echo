@@ -1,5 +1,8 @@
 package model;
 
+import android.util.Log;
+
+import model.exceptions.NonTranslatableWordException;
 import model.exceptions.TranslatingWordException;
 import model.service.TranslatorService;
 import model.storage.Storage;
@@ -15,6 +18,11 @@ public class RepositoryImpl implements Repository {
     }
 
     public String translateWord(String wordToTranslate) throws TranslatingWordException {
+        if(!SpellingChecker.isCorrect(wordToTranslate)) {
+            Log.d("Es correcto:",""+!SpellingChecker.isCorrect(wordToTranslate));
+            throw new NonTranslatableWordException();
+        }
+
         String translatedWord = storage.getMeaning(wordToTranslate);
 
         if (translatedWord != null) {

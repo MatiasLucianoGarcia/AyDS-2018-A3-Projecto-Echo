@@ -1,7 +1,10 @@
 package model.exceptions;
 
 public class NonTranslatableWordException extends TranslatingWordException {
-    public NonTranslatableWordException(String errorMessage) {
-        super(errorMessage);
+
+    private static final String ERROR_MESSAGE = "No se ha ingresado una palabra traducible";
+
+    public NonTranslatableWordException() {
+        super(ERROR_MESSAGE);
     }
 }

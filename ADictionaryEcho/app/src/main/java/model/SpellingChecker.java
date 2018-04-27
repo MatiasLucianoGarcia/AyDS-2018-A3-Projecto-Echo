@@ -1,7 +1,7 @@
 package model;
 
-public class Checker {
-    private Checker() {
+public class SpellingChecker {
+    private SpellingChecker() {
     }
 
     public static boolean isCorrect(String s){
