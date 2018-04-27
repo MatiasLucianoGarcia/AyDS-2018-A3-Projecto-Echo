@@ -1,6 +1,8 @@
 package view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
@@ -12,6 +14,7 @@ import ayds.dictionary.echo.R;
 import controller.TranslatorController;
 import model.TranslatorModel;
 import model.ModelModule;
+import model.TranslatorModelExceptionListener;
 import model.TranslatorModelListener;
 import controller.ControllerModule;
 
@@ -69,6 +72,25 @@ public class TranslatorViewActivity extends AppCompatActivity {
                 updateText(translatedWord);
             }
         });
+        model.setExceptionListener(new TranslatorModelExceptionListener() {
+            @Override
+            public void sendExceptionMessage(String exceptionMessage) {
+                createNewAlertDialog(exceptionMessage);
+            }
+        });
+    }
+
+    private void createNewAlertDialog(String exceptionMessage) {
+        AlertDialog alertDialog = new AlertDialog.Builder(TranslatorViewActivity.this).create();
+        alertDialog.setTitle("Error");
+        alertDialog.setMessage(exceptionMessage);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     private void updateText(String translatedWord) {

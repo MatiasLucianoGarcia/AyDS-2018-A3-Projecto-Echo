@@ -3,6 +3,7 @@ package model;
 class TranslatorModelImpl implements TranslatorModel {
 
     private TranslatorModelListener listener;
+    private TranslatorModelExceptionListener translatorModelExceptionListener;
     private Repository repository;
 
     TranslatorModelImpl(Repository repository) {
@@ -22,4 +23,10 @@ class TranslatorModelImpl implements TranslatorModel {
     public void setListener(TranslatorModelListener listener) {
         this.listener = listener;
     }
+
+    @Override
+    public void setExceptionListener(TranslatorModelExceptionListener translatorModelExceptionListener) {
+        this.translatorModelExceptionListener = translatorModelExceptionListener;
+    }
+
 }
