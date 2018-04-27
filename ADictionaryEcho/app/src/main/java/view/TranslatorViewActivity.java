@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ayds.dictionary.echo.R;
 import controller.TranslatorController;
@@ -74,13 +75,21 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
         model.setExceptionListener(new TranslatorModelExceptionListener() {
             @Override
-            public void sendExceptionMessage(String exceptionMessage) {
-                createNewAlertDialog(exceptionMessage);
+            public void sendExceptionMessage(final String exceptionMessage) {
+                TranslatorViewActivity.this.runOnUiThread(new Runnable()
+                {
+                    public void run() {
+                        createNewAlertDialog(exceptionMessage);
+                    }
+                });
             }
         });
     }
 
     private void createNewAlertDialog(String exceptionMessage) {
+        Toast.makeText(TranslatorViewActivity.this, exceptionMessage,
+                Toast.LENGTH_LONG).show();
+        /*
         AlertDialog alertDialog = new AlertDialog.Builder(TranslatorViewActivity.this).create();
         alertDialog.setTitle("Error");
         alertDialog.setMessage(exceptionMessage);
@@ -91,6 +100,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
+        */
     }
 
     private void updateText(String translatedWord) {
