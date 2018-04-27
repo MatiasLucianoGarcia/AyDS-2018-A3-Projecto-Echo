@@ -18,9 +18,7 @@ public class RepositoryImpl implements Repository {
     }
 
     public String translateWord(String wordToTranslate) throws TranslatingWordException {
-        if(!SpellingChecker.isCorrect(wordToTranslate)) {
-            throw new NonTranslatableWordException();
-        }
+        checkWellFormedSentence(wordToTranslate);
 
         String translatedWord = storage.getMeaning(wordToTranslate);
 
@@ -33,6 +31,12 @@ public class RepositoryImpl implements Repository {
         }
 
         return translatedWord;
+    }
+
+    private void checkWellFormedSentence(String wordToCheck) throws NonTranslatableWordException {
+        if(!SpellingChecker.isCorrect(wordToCheck)) {
+            throw new NonTranslatableWordException();
+        }
     }
 
 }
