@@ -12,7 +12,7 @@ class DataBase implements Storage {
 
     private DataBase() {}
 
-    public static DataBase getInstance() {
+    static DataBase getInstance() {
         if (instance == null) {
             instance = new DataBase();
         }

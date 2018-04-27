@@ -7,7 +7,7 @@ class JsonToStringConverter implements ResultConverter {
 
     private Gson gson;
 
-    public JsonToStringConverter(Gson gson){
+    JsonToStringConverter(Gson gson){
         this.gson=gson;
     }
 

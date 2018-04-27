@@ -9,7 +9,7 @@ class TranslatorServiceImpl implements TranslatorService {
     private YandexAPI service;
     private ResultConverter resultConverter;
 
-    public TranslatorServiceImpl(YandexAPI service, ResultConverter resultConverter) {
+    TranslatorServiceImpl(YandexAPI service, ResultConverter resultConverter) {
         this.service = service;
         this.resultConverter=resultConverter;
     }

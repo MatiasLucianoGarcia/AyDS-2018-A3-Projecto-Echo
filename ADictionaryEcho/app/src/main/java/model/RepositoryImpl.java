@@ -8,7 +8,7 @@ public class RepositoryImpl implements Repository {
     private Storage storage;
     private TranslatorService translatorService;
 
-    public RepositoryImpl(Storage storage,TranslatorService translatorService){
+    RepositoryImpl(Storage storage,TranslatorService translatorService){
         this.storage = storage;
         this.translatorService = translatorService;
     }

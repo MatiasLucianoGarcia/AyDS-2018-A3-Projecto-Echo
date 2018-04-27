@@ -5,16 +5,16 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 class YandexApiConnection {
 
-    protected Retrofit retrofit;
+    private Retrofit retrofit;
 
-    public void connectAPI() {
+    void connectAPI() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(ServiceConfiguration.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
     }
 
-    public YandexAPI getYandex() {
+    YandexAPI getYandex() {
         return retrofit.create(YandexAPI.class);
     }
 }

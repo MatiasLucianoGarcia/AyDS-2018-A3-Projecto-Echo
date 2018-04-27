@@ -6,7 +6,7 @@ class TranslatorControllerImpl implements TranslatorController {
 
     protected TranslatorModel model;
 
-    public TranslatorControllerImpl(TranslatorModel model) {
+    TranslatorControllerImpl(TranslatorModel model) {
         this.model = model;
     }
 
