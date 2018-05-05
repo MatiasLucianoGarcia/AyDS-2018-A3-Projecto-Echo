@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
     private EditText textFieldForTranslatingWord;
     private Button buttonForTranslating;
     private TextView labelTranslatedWord;
+    private ProgressBar progressBar;
 
     private FormatConverter formatConverter;
 
@@ -53,6 +55,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         textFieldForTranslatingWord = findViewById(R.id.textField1);
         buttonForTranslating = findViewById(R.id.goButton);
         labelTranslatedWord = findViewById(R.id.textPane1);
+        progressBar = findViewById(R.id.progressBar);
     }
 
     private void saveContext(){
@@ -63,11 +66,13 @@ public class TranslatorViewActivity extends AppCompatActivity {
         buttonForTranslating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 controller.onEventUpdate(textFieldForTranslatingWord.getText().toString());
             }
         });
         model.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord(String translatedWord) {
+                progressBar.setVisibility(View.GONE);
                 updateText(translatedWord);
             }
         });

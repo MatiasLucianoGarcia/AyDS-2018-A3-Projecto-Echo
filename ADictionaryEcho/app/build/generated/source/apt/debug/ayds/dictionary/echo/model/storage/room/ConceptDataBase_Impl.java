@@ -2,11 +2,16 @@ package ayds.dictionary.echo.model.storage.room;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.db.SupportSQLiteOpenHelper;
+import android.arch.persistence.db.SupportSQLiteOpenHelper.Callback;
+import android.arch.persistence.db.SupportSQLiteOpenHelper.Configuration;
 import android.arch.persistence.room.DatabaseConfiguration;
 import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.RoomOpenHelper;
+import android.arch.persistence.room.RoomOpenHelper.Delegate;
 import android.arch.persistence.room.util.TableInfo;
-
+import android.arch.persistence.room.util.TableInfo.Column;
+import android.arch.persistence.room.util.TableInfo.ForeignKey;
+import android.arch.persistence.room.util.TableInfo.Index;
 import java.lang.IllegalStateException;
 import java.lang.Override;
 import java.lang.String;
