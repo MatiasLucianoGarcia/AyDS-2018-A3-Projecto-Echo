@@ -20,7 +20,7 @@ public class ModelModule {
     }
 
     public void initTranslatorModel() {
-        Repository repository = new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServiceModule.getInstance().getTranslatorService());
+        Repository repository = new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServiceModule.getInstance().getTranslatorService(),new ExceptionHandlerImpl());
         translatorModel = new TranslatorModelImpl(repository);
     }
 

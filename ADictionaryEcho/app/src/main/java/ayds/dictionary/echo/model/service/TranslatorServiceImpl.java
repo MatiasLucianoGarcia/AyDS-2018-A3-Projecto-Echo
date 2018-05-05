@@ -16,11 +16,11 @@ class TranslatorServiceImpl implements TranslatorService {
     }
 
     public String callCreateTranslatedWord(String wordToTranslate) throws NoConnectionException {
-        Response<String> callResponse = null;
+        Response<String> callResponse;
         try {
             callResponse = service.getTerm(wordToTranslate).execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new NoConnectionException();
         }
 
         String resultToConvert;
