@@ -1,11 +1,8 @@
 package ayds.dictionary.echo.model;
 
-import ayds.dictionary.echo.model.exceptions.TranslatingWordException;
-
 class TranslatorModelImpl implements TranslatorModel {
 
     private TranslatorModelListener listener;
-    private TranslatorModelExceptionListener translatorModelExceptionListener;
     private Repository repository;
 
     TranslatorModelImpl(Repository repository) {
@@ -17,12 +14,8 @@ class TranslatorModelImpl implements TranslatorModel {
             @Override
             public void run() {
                 String translatedWord;
-                try {
-                    translatedWord = repository.translateWord(wordToTranslate);
-                    listener.didUpdateWord(translatedWord);
-                } catch (TranslatingWordException e) {
-                    translatorModelExceptionListener.sendExceptionMessage(e.getMessage());
-                }
+                translatedWord = repository.translateWord(wordToTranslate);
+                listener.didUpdateWord(translatedWord);
             }
         }).start();
     }
@@ -34,7 +27,7 @@ class TranslatorModelImpl implements TranslatorModel {
 
     @Override
     public void setExceptionListener(TranslatorModelExceptionListener translatorModelExceptionListener) {
-        this.translatorModelExceptionListener = translatorModelExceptionListener;
+        repository.setExceptionListener(translatorModelExceptionListener);
     }
 
 }
