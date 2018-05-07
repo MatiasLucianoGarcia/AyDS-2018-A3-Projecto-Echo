@@ -72,7 +72,6 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
         model.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord(String translatedWord) {
-                progressBar.setVisibility(View.GONE);
                 updateText(translatedWord);
             }
         });
@@ -101,6 +100,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
             @Override
             public void run() {
                 labelTranslatedWord.setText(Html.fromHtml(wordToShow));
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
