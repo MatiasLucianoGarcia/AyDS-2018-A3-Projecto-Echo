@@ -6,19 +6,15 @@ class SpellingChecker {
     }
 
     static boolean isCorrect(String text){
-        return !(isFullWhiteSpaces(text)|| hasKeys(text) || hasBrackets(text)|| isNull(text));
+        return !(isFullWhiteSpaces(text) || isNull(text)) && isAlphabetic(text);
     }
 
     private static boolean isFullWhiteSpaces(String s){
         return s.trim().length()==0;
     }
 
-    private static boolean hasKeys(String s){
-        return s.contains("{") || s.contains("}");
-    }
-
-    private static boolean hasBrackets(String s){
-        return s.contains("[") || s.contains("]");
+    private static boolean isAlphabetic(String name) {
+        return name.matches("[a-zA-Z]+");
     }
 
     private static boolean isNull(String s){
