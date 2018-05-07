@@ -1,6 +1,5 @@
 package ayds.dictionary.echo.model;
 
-import ayds.dictionary.echo.model.exceptions.NoConnectionException;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 import ayds.dictionary.echo.model.exceptions.TranslatingWordException;
 import ayds.dictionary.echo.model.service.TranslatorService;
@@ -19,26 +18,20 @@ class RepositoryImpl implements Repository {
     }
 
     public String translateWord(String wordToTranslate) {
-        String translatedWord;
+        String translatedWord="";
         try {
             checkWellFormedSentence(wordToTranslate);
+            translatedWord = storage.getMeaning(wordToTranslate);
+            if (translatedWord != null) {
+                translatedWord = "[*]" + translatedWord;
+            }
+            else{
+                translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
+                storage.saveTerm(wordToTranslate, translatedWord);
+            }
         } catch(TranslatingWordException exception){
             exceptionHandler.handleException(exception);
         }
-        translatedWord = storage.getMeaning(wordToTranslate);
-
-        if (translatedWord != null) {
-            translatedWord = "[*]" + translatedWord;
-        }
-        else {
-            try {
-                translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
-            } catch (NoConnectionException e) {
-                exceptionHandler.handleException(e);
-            }
-            storage.saveTerm(wordToTranslate, translatedWord);
-        }
-
         return translatedWord;
     }
 
