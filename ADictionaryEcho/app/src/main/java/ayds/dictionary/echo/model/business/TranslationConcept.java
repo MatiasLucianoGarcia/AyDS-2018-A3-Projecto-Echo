@@ -1,15 +1,15 @@
-package ayds.dictionary.echo.model;
+package ayds.dictionary.echo.model.business;
 
 public class TranslationConcept {
 
     private String term;
     private String meaning;
-    private String fuente;
+    private int source;
 
-    public TranslationConcept(String term, String meaning, String source) {
+    public TranslationConcept(String term, String meaning, int source) {
         this.term = term;
         this.meaning = meaning;
-        this.fuente = source;
+        this.source = source;
     }
 
     public String getTerm() {
@@ -28,11 +28,11 @@ public class TranslationConcept {
         this.meaning = meaning;
     }
 
-    public String getSource() {
-        return fuente;
+    public int getSource() {
+        return source;
     }
 
-    public void setSource(String source) {
-        this.fuente = source;
+    public void setSource(int source) {
+        this.source = source;
     }
 }

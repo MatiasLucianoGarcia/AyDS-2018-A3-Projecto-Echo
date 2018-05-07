@@ -27,6 +27,7 @@ class RepositoryImpl implements Repository {
             }
             else{
                 translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
+                TranslationConcept translationConcept =  new TranslationConcept(wordToTranslate,translatedWord,Sources.YANDEX.ordinal())
                 storage.saveTerm(wordToTranslate, translatedWord);
             }
         } catch(Exception exception){
