@@ -15,7 +15,8 @@ class TranslatorModelImpl implements TranslatorModel {
             public void run() {
                 String translatedWord;
                 translatedWord = repository.translateWord(wordToTranslate);
-                listener.didUpdateWord(translatedWord);
+                if(translatedWord!=null)
+                    listener.didUpdateWord(translatedWord);
             }
         }).start();
     }

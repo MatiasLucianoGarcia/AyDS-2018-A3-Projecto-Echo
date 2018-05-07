@@ -18,7 +18,7 @@ class RepositoryImpl implements Repository {
     }
 
     public String translateWord(String wordToTranslate) {
-        String translatedWord="";
+        String translatedWord=null;
         try {
             checkWellFormedSentence(wordToTranslate);
             translatedWord = storage.getMeaning(wordToTranslate);
