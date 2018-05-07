@@ -4,12 +4,12 @@ public class TranslationConcept {
 
     private String term;
     private String meaning;
-    private String source;
+    private String fuente;
 
     public TranslationConcept(String term, String meaning, String source) {
         this.term = term;
         this.meaning = meaning;
-        this.source = source;
+        this.fuente = source;
     }
 
     public String getTerm() {
@@ -29,10 +29,10 @@ public class TranslationConcept {
     }
 
     public String getSource() {
-        return source;
+        return fuente;
     }
 
     public void setSource(String source) {
-        this.source = source;
+        this.fuente = source;
     }
 }
