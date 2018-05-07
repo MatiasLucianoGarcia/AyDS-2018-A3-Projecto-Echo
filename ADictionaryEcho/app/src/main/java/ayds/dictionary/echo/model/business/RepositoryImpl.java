@@ -1,8 +1,8 @@
-package ayds.dictionary.echo.model;
+package ayds.dictionary.echo.model.business;
 
+import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
-import ayds.dictionary.echo.model.exceptions.TranslatingWordException;
-import ayds.dictionary.echo.model.service.TranslatorService;
+import com.example.yandex.service.TranslatorService;
 import ayds.dictionary.echo.model.storage.Storage;
 
 class RepositoryImpl implements Repository {
@@ -29,7 +29,7 @@ class RepositoryImpl implements Repository {
                 translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
                 storage.saveTerm(wordToTranslate, translatedWord);
             }
-        } catch(TranslatingWordException exception){
+        } catch(Exception exception){
             exceptionHandler.handleException(exception);
         }
         return translatedWord;

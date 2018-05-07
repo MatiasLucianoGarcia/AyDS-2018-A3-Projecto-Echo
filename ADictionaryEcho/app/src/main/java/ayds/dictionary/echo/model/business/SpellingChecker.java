@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.model;
+package ayds.dictionary.echo.model.business;
 
 class SpellingChecker {
 

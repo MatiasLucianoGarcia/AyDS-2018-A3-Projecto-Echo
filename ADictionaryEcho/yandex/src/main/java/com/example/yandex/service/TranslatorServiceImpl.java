@@ -1,8 +1,7 @@
-package ayds.dictionary.echo.model.service;
+package com.example.yandex.service;
 
 import java.io.IOException;
 
-import ayds.dictionary.echo.model.exceptions.NoConnectionException;
 import retrofit2.Response;
 
 class TranslatorServiceImpl implements TranslatorService {
@@ -15,12 +14,12 @@ class TranslatorServiceImpl implements TranslatorService {
         this.resultConverter = resultConverter;
     }
 
-    public String callCreateTranslatedWord(String wordToTranslate) throws NoConnectionException {
+    public String callCreateTranslatedWord(String wordToTranslate) throws Exception {
         Response<String> callResponse;
         try {
             callResponse = service.getTerm(wordToTranslate).execute();
         } catch (IOException e) {
-            throw new NoConnectionException();
+            throw new Exception("No hay conexion a Internet");
         }
 
         String resultToConvert;
@@ -28,7 +27,7 @@ class TranslatorServiceImpl implements TranslatorService {
             resultToConvert = callResponse.body();
         }
         catch(NullPointerException exception){
-            throw new NoConnectionException();
+            throw new Exception("No hay conexion a Internet");
         }
 
         return resultConverter.createTranslatorResult(resultToConvert);

@@ -1,5 +1,7 @@
 package ayds.dictionary.echo.model;
 
+import ayds.dictionary.echo.model.business.Repository;
+
 class TranslatorModelImpl implements TranslatorModel {
 
     private TranslatorModelListener listener;

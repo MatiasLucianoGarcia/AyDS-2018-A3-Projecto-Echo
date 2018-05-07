@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.model.service;
+package com.example.yandex.service;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
