@@ -19,7 +19,7 @@ class TranslatorServiceImpl implements TranslatorService {
         try {
             callResponse = service.getTerm(wordToTranslate).execute();
         } catch (IOException e) {
-            throw new Exception("No hay conexion a Internet");
+            throw new Exception();
         }
 
         String resultToConvert;
@@ -27,7 +27,7 @@ class TranslatorServiceImpl implements TranslatorService {
             resultToConvert = callResponse.body();
         }
         catch(NullPointerException exception){
-            throw new Exception("No hay conexion a Internet");
+            throw new NoConnectionException("No hay conexion a Internet");
         }
 
         return resultConverter.createTranslatorResult(resultToConvert);

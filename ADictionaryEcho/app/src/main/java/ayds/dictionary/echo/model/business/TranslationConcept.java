@@ -4,9 +4,9 @@ public class TranslationConcept {
 
     private String term;
     private String meaning;
-    private int source;
+    private Source source;
 
-    public TranslationConcept(String term, String meaning, int source) {
+    public TranslationConcept(String term, String meaning, Source source) {
         this.term = term;
         this.meaning = meaning;
         this.source = source;
@@ -16,7 +16,7 @@ public class TranslationConcept {
         return term;
     }
 
-    public void setTerm(String term) {
+    public void setTerm(String term){
         this.term = term;
     }
 
@@ -24,15 +24,8 @@ public class TranslationConcept {
         return meaning;
     }
 
-    public void setMeaning(String meaning) {
-        this.meaning = meaning;
-    }
-
-    public int getSource() {
+    public Source getSource() {
         return source;
     }
 
-    public void setSource(int source) {
-        this.source = source;
-    }
 }

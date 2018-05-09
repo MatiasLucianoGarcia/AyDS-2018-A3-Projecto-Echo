@@ -1,5 +1,6 @@
 package ayds.dictionary.echo.model.business;
 
-enum Sources{
-    YANDEX
+public enum Source {
+    YANDEX,
+    NULL
 }

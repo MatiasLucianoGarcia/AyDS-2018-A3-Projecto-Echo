@@ -17,23 +17,23 @@ class RepositoryImpl implements Repository {
         this.exceptionHandler = exceptionHandler;
     }
 
-    public String translateWord(String wordToTranslate) {
-        String translatedWord="";
+    public TranslationConcept translateWord(String wordToTranslate) {
+        TranslationConcept translationConcept = new NullTranslationConcept();
         try {
             checkWellFormedSentence(wordToTranslate);
-            translatedWord = storage.getMeaning(wordToTranslate);
-            if (translatedWord != null) {
-                translatedWord = "[*]" + translatedWord;
+            translationConcept = storage.getMeaning(wordToTranslate);
+            if (translationConcept.getMeaning() != "") {
+                translationConcept.setTerm("[*]" + translationConcept.getMeaning());
             }
             else{
-                translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
-                TranslationConcept translationConcept =  new TranslationConcept(wordToTranslate,translatedWord,Sources.YANDEX.ordinal())
-                storage.saveTerm(wordToTranslate, translatedWord);
+                String translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
+                translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, Source.YANDEX);
+                storage.saveTerm(translationConcept);
             }
         } catch(Exception exception){
             exceptionHandler.handleException(exception);
         }
-        return translatedWord;
+        return translationConcept;
     }
 
     private void checkWellFormedSentence(String wordToCheck) throws NonTranslatableWordException {

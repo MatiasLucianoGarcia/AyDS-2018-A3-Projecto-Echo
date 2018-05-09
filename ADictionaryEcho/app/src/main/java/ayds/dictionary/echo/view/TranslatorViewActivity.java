@@ -17,10 +17,13 @@ import ayds.dictionary.echo.model.ModelModule;
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.TranslatorModelListener;
 import ayds.dictionary.echo.controller.ControllerModule;
+import ayds.dictionary.echo.model.business.Source;
+import ayds.dictionary.echo.model.business.TranslationConcept;
 
 public class TranslatorViewActivity extends AppCompatActivity {
 
     private EditText textFieldForTranslatingWord;
+    private TextView labelWordSource;
     private Button buttonForTranslating;
     private TextView labelTranslatedWord;
     private ProgressBar progressBar;
@@ -56,6 +59,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         buttonForTranslating = findViewById(R.id.goButton);
         labelTranslatedWord = findViewById(R.id.textPane1);
         progressBar = findViewById(R.id.progressBar);
+        labelWordSource = findViewById(R.id.textPane);
     }
 
     private void saveContext(){
@@ -71,8 +75,9 @@ public class TranslatorViewActivity extends AppCompatActivity {
             }
         });
         model.setListener(new TranslatorModelListener() {
-            @Override public void didUpdateWord(String translatedWord) {
-                updateText(translatedWord);
+            @Override public void didUpdateWord(TranslationConcept translatedWord) {
+                updateText(translatedWord.getMeaning());
+                updateSource(translatedWord.getSource());
             }
         });
         model.setExceptionListener(new TranslatorModelExceptionListener() {
@@ -88,11 +93,6 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
     }
 
-    private void createNewAlertDialog(String exceptionMessage) {
-        Toast.makeText(TranslatorViewActivity.this, exceptionMessage,
-                Toast.LENGTH_LONG).show();
-    }
-
     private void updateText(String translatedWord) {
         translatedWord = formatConverter.formatTo(translatedWord, labelTranslatedWord.getText().toString());
         final String wordToShow = translatedWord;
@@ -104,4 +104,20 @@ public class TranslatorViewActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void updateSource(final Source source) {
+        labelWordSource.post(new Runnable() {
+            @Override
+            public void run() {
+                labelTranslatedWord.setText(source.name());
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void createNewAlertDialog(String exceptionMessage) {
+        Toast.makeText(TranslatorViewActivity.this, exceptionMessage,
+                Toast.LENGTH_LONG).show();
+    }
+
 }
