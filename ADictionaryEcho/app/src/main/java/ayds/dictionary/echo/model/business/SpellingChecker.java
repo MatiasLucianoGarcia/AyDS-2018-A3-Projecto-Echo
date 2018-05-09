@@ -14,7 +14,7 @@ class SpellingChecker {
     }
 
     private static boolean isAlphabetic(String name) {
-        return name.matches("[a-zA-Z]+");
+        return name.matches("[a-zA-Z ]+");
     }
 
     private static boolean isNull(String s){

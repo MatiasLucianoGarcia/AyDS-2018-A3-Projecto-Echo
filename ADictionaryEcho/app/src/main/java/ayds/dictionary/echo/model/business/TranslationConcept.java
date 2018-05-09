@@ -16,12 +16,12 @@ public class TranslationConcept {
         return term;
     }
 
-    public void setTerm(String term){
-        this.term = term;
-    }
-
     public String getMeaning() {
         return meaning;
+    }
+
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 
     public Source getSource() {

@@ -76,8 +76,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
         model.setListener(new TranslatorModelListener() {
             @Override public void didUpdateWord(TranslationConcept translatedWord) {
-                updateText(translatedWord.getMeaning());
-                updateSource(translatedWord.getSource());
+                updateTextFields(translatedWord);
             }
         });
         model.setExceptionListener(new TranslatorModelExceptionListener() {
@@ -93,23 +92,13 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
     }
 
-    private void updateText(String translatedWord) {
-        translatedWord = formatConverter.formatTo(translatedWord, labelTranslatedWord.getText().toString());
-        final String wordToShow = translatedWord;
+    private void updateTextFields(final TranslationConcept translatedWord) {
+        final String wordToShow = formatConverter.formatTo(translatedWord.getMeaning(), labelTranslatedWord.getText().toString());
         labelTranslatedWord.post(new Runnable() {
             @Override
             public void run() {
                 labelTranslatedWord.setText(Html.fromHtml(wordToShow));
-                progressBar.setVisibility(View.GONE);
-            }
-        });
-    }
-
-    private void updateSource(final Source source) {
-        labelWordSource.post(new Runnable() {
-            @Override
-            public void run() {
-                labelTranslatedWord.setText(source.name());
+                labelWordSource.setText(translatedWord.getSource().getName());
                 progressBar.setVisibility(View.GONE);
             }
         });

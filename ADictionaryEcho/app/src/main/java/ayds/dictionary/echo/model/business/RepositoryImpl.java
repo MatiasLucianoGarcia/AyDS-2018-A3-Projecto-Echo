@@ -22,8 +22,8 @@ class RepositoryImpl implements Repository {
         try {
             checkWellFormedSentence(wordToTranslate);
             translationConcept = storage.getMeaning(wordToTranslate);
-            if (translationConcept.getMeaning() != "") {
-                translationConcept.setTerm("[*]" + translationConcept.getMeaning());
+            if (!translationConcept.getMeaning().equals("")) {
+                translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
             }
             else{
                 String translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
