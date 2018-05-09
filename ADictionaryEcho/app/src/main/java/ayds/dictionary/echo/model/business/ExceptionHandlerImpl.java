@@ -1,7 +1,9 @@
 package ayds.dictionary.echo.model.business;
 
+import com.example.yandex.service.NoConnectionException;
+
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
-import ayds.dictionary.echo.model.exceptions.TranslatingWordException;
+import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
 class ExceptionHandlerImpl implements ExceptionHandler {
 
@@ -9,7 +11,10 @@ class ExceptionHandlerImpl implements ExceptionHandler {
 
     @Override
     public void handleException(Exception translatingWordException) {
-        exceptionListener.sendExceptionMessage(translatingWordException.getMessage());
+        if(!(translatingWordException instanceof NoConnectionException || translatingWordException instanceof NonTranslatableWordException))
+            exceptionListener.sendExceptionMessage("Error inesperado");
+        else
+            exceptionListener.sendExceptionMessage(translatingWordException.getMessage());
     }
 
     @Override
