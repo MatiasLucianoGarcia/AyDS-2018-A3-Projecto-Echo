@@ -1,8 +1,8 @@
 package ayds.dictionary.echo.model.business;
 
 public enum Source {
-    YANDEX("Yandex"),
-    NULL("");
+    NULL(""),
+    YANDEX("Yandex");
 
     private String name;
 
