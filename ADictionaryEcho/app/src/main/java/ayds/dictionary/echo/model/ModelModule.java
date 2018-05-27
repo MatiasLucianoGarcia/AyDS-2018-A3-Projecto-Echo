@@ -1,7 +1,6 @@
 package ayds.dictionary.echo.model;
 
-import ayds.dictionary.echo.model.service.ServiceModule;
-import ayds.dictionary.echo.model.storage.StorageModule;
+import ayds.dictionary.echo.model.business.BusinessModule;
 
 public class ModelModule {
 
@@ -20,8 +19,7 @@ public class ModelModule {
     }
 
     public void initTranslatorModel() {
-        Repository repository = new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServiceModule.getInstance().getTranslatorService());
-        translatorModel = new TranslatorModelImpl(repository);
+        translatorModel = new TranslatorModelImpl(BusinessModule.getInstance().getRepository());
     }
 
     public TranslatorModel getTranslatorModel() {

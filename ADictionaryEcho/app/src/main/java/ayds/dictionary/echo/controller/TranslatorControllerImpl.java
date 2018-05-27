@@ -4,7 +4,7 @@ import ayds.dictionary.echo.model.TranslatorModel;
 
 class TranslatorControllerImpl implements TranslatorController {
 
-    protected TranslatorModel model;
+    private TranslatorModel model;
 
     TranslatorControllerImpl(TranslatorModel model) {
         this.model = model;
