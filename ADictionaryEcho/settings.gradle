@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':yandex'
+project(':yandex').projectDir = new File('yandexservice')
