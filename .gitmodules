@@ -1,0 +1,3 @@
+[submodule "ADictionaryEcho/yandexservice"]
+	path = ADictionaryEcho/yandexservice
+	url = https://github.com/tomasfelder/yandexservice
