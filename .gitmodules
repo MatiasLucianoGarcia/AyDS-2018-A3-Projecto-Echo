@@ -1,3 +1,9 @@
 [submodule "ADictionaryEcho/yandexservice"]
 	path = ADictionaryEcho/yandexservice
-	url = https://github.com/tomasfelder/yandexservice
+	url = https://github.com/tomasfelder/yandexservice 
+[submodule "ADictionaryEcho/WikipediaService"]
+	path = ADictionaryEcho/WikipediaService
+	url = https://github.com/ProyectoAyDS/WikipediaService
+[submodule "ADictionaryEcho/BighugelabsLib"]
+	path = ADictionaryEcho/BighugelabsLib
+	url = https://github.com/juanolmedo1/BighugelabsLib
