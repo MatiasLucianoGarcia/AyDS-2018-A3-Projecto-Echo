@@ -1,2 +1,4 @@
-include ':app', ':yandex'
+include ':app', ':yandex', ':bighugelabs', ':wikipedia'
 project(':yandex').projectDir = new File('yandexservice')
+project(':bighugelabs').projectDir = new File('BighugelabsLib')
+project(':wikipedia').projectDir = new File('WikipediaService/WikipediaService')
