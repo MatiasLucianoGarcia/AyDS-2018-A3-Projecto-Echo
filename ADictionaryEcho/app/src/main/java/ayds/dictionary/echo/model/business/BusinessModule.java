@@ -1,7 +1,7 @@
 package ayds.dictionary.echo.model.business;
 
 
-import com.example.yandex.service.ServiceModule;
+import ayds.dictionary.echo.model.business.services.ServicesModule;
 import ayds.dictionary.echo.model.storage.StorageModule;
 
 public class BusinessModule {
@@ -15,6 +15,6 @@ public class BusinessModule {
     }
 
     public Repository getRepository(){
-        return new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServiceModule.getInstance().getTranslatorService(),new ExceptionHandlerImpl());
+        return new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServicesModule.getInstance().getServiceAdministrator(),new ExceptionHandlerImpl());
     }
 }

@@ -1,6 +1,8 @@
 package ayds.dictionary.echo.model.business;
 
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
+import ayds.dictionary.echo.model.business.services.ServiceAdministrator;
+import ayds.dictionary.echo.model.business.services.ServiceDefinition;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 import com.example.yandex.service.TranslatorService;
 import ayds.dictionary.echo.model.storage.Storage;
@@ -8,19 +10,28 @@ import ayds.dictionary.echo.model.storage.Storage;
 class RepositoryImpl implements Repository {
 
     private Storage storage;
-    private TranslatorService translatorService;
+    private ServiceAdministrator serviceAdministrator;
     private ExceptionHandler exceptionHandler;
 
-    RepositoryImpl(Storage storage,TranslatorService translatorService,ExceptionHandler exceptionHandler){
+    RepositoryImpl(Storage storage,ServiceAdministrator serviceAdministrator,ExceptionHandler exceptionHandler){
         this.storage = storage;
-        this.translatorService = translatorService;
+        this.serviceAdministrator = serviceAdministrator;
         this.exceptionHandler = exceptionHandler;
     }
 
     public TranslationConcept translateWord(String wordToTranslate) {
         TranslationConcept translationConcept = new NullTranslationConcept();
-        try {
+        try{
             checkWellFormedSentence(wordToTranslate);
+            for(ServiceDefinition serviceDefinition : serviceAdministrator.getServices()) {
+                translationConcept = storage.getMeaning(wordToTranslate);
+            }
+        }
+        catch(Exception exception){
+            exceptionHandler.handleException(exception);
+        }
+        try {
+
             translationConcept = storage.getMeaning(wordToTranslate);
             if (!translationConcept.getMeaning().equals("")) {
                 translationConcept.setMeaning("[*]" + translationConcept.getMeaning());

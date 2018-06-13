@@ -35,8 +35,8 @@ class DataBase implements Storage {
         db.termDao().insert(concept);
     }
 
-    public TranslationConcept getMeaning(String term) {
-        Concept concept = db.termDao().findByName(term);
+    public TranslationConcept getMeaning(String term, Source source) {
+        Concept concept = db.termDao().findByNameAndSource(term, source.ordinal());
         if (concept != null) {
             return new TranslationConcept(term,concept.getMeaning(), Source.values()[concept.getSource()]);
         }

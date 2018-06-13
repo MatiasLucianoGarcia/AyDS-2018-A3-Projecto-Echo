@@ -7,7 +7,6 @@ public class ModelModule {
     private static ModelModule instance;
     private TranslatorModel translatorModel;
 
-    //Branch Entrega 4
     private ModelModule() {
 
     }
