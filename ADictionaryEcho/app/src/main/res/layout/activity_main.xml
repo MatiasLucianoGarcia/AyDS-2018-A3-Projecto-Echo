@@ -48,16 +48,42 @@
       android:orientation="vertical" >
 
       <TextView
-          android:id="@+id/textPane1"
+          android:id="@+id/textViewSource1"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:padding="20dp" />
+          android:padding="18dp" />
 
       <TextView
-          android:id="@+id/textPane"
+          android:id="@+id/textPaneMeaning1"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:padding="20dp"
+          android:padding="18dp"
+          android:textStyle="bold" />
+
+      <TextView
+          android:id="@+id/textViewSource2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="18dp" />
+
+      <TextView
+          android:id="@+id/textPaneMeaning2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="18dp"
+          android:textStyle="bold" />
+
+      <TextView
+          android:id="@+id/textViewSource3"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="18dp" />
+
+      <TextView
+          android:id="@+id/textPaneMeaning3"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="18dp"
           android:textStyle="bold" />
     </LinearLayout>
   </ScrollView>
