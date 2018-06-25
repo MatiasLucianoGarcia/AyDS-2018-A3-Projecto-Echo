@@ -27,6 +27,16 @@ class RepositoryImpl implements Repository {
         List<TranslationConcept> translationConcepts = initTranslationConcepts();
         try{
             checkWellFormedSentence(wordToTranslate);
+            translationConcepts = iterateServices(translationConcepts,wordToTranslate);
+        }
+        catch(NonTranslatableWordException e)
+        {
+            exceptionHandler.handleException(e);
+        }
+        return translationConcepts;
+    }
+
+    private List<TranslationConcept> iterateServices(List<TranslationConcept> translationConcepts, String wordToTranslate){
             int i = 0;
             for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet()) {
                 try{
@@ -47,10 +57,6 @@ class RepositoryImpl implements Repository {
                 }
                 i++;
             }
-        }
-        catch(NonTranslatableWordException exception){
-            exceptionHandler.handleException(exception);
-        }
         return translationConcepts;
     }
 
