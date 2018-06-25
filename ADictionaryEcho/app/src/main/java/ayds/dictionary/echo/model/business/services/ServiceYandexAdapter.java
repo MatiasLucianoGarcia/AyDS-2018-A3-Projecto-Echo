@@ -1,6 +1,5 @@
 package ayds.dictionary.echo.model.business.services;
 
-import com.example.yandex.service.YandexModule;
 import com.example.yandex.service.TranslatorService;
 
 public class ServiceYandexAdapter implements ServiceDefinition {

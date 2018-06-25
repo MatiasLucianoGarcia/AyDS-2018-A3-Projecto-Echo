@@ -24,24 +24,40 @@ class RepositoryImpl implements Repository {
     }
 
     public List<TranslationConcept> translateWord(String wordToTranslate) {
-        List<TranslationConcept> translationConcepts = new ArrayList<>();
+        List<TranslationConcept> translationConcepts = initTranslationConcepts();
         try{
             checkWellFormedSentence(wordToTranslate);
+            int i = 0;
             for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet()) {
-                TranslationConcept translationConcept = storage.getMeaning(wordToTranslate,entry.getKey());
-                if (!translationConcept.getMeaning().equals("")) {
-                    translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
+                try{
+                    TranslationConcept translationConcept = storage.getMeaning(wordToTranslate,entry.getKey());
+                    if (!translationConcept.getMeaning().equals("")) {
+                        translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
+                    }
+                    else{
+                        String translatedWord = findMeaningInService(wordToTranslate,entry.getValue());
+                        translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, entry.getKey());
+                        storage.saveTerm(translationConcept);
+                    }
+                    translationConcepts.remove(i);
+                    translationConcepts.add(i,translationConcept);
                 }
-                else{
-                    String translatedWord = entry.getValue().getResult(wordToTranslate);
-                    translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, entry.getKey());
-                    storage.saveTerm(translationConcept);
+                catch (Exception exception){
+                    exceptionHandler.handleException(exception);
                 }
-                translationConcepts.add(translationConcept);
+                i++;
             }
         }
-        catch(Exception exception){
+        catch(NonTranslatableWordException exception){
             exceptionHandler.handleException(exception);
+        }
+        return translationConcepts;
+    }
+
+    private List<TranslationConcept> initTranslationConcepts(){
+        List<TranslationConcept> translationConcepts = new ArrayList<>();
+        for(int i=0;i<serviceAdministrator.getServices().size();i++){
+            translationConcepts.add(i, new NullTranslationConcept());
         }
         return translationConcepts;
     }
@@ -50,6 +66,13 @@ class RepositoryImpl implements Repository {
         if(!SpellingChecker.isCorrect(wordToCheck)) {
             throw new NonTranslatableWordException();
         }
+    }
+
+    private String findMeaningInService(String wordToTranslate, ServiceDefinition serviceDefinition) throws Exception{
+        String translatedWord = serviceDefinition.getResult(wordToTranslate);
+        if(translatedWord == null)
+            translatedWord = "";
+        return translatedWord;
     }
 
     @Override

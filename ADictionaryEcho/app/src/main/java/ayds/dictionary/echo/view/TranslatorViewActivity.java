@@ -93,17 +93,6 @@ public class TranslatorViewActivity extends AppCompatActivity {
     }
 
     private void updateTextFields(final List<TranslationConcept> translatedWords) {
-        /*for (final TranslationConcept translationConcept : translatedWords) {
-            final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
-            textPane.post(new Runnable() {
-                @Override
-                public void run() {
-                    textPane.setText(Html.fromHtml(wordToShow));
-                    textPane.setText(translationConcept.getSource().getName());
-                    progressBar.setVisibility(View.GONE);
-                }
-            });
-        }*/
         final String conceptString = buildString(translatedWords);
         textPane.post(new Runnable() {
             @Override
@@ -118,7 +107,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         String conceptString = "";
         for (TranslationConcept translationConcept: translatedWords) {
             final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
-            conceptString = conceptString + translationConcept.getSource().getName() + "\n";
+            conceptString = conceptString + Html.fromHtml("<strong>"+ translationConcept.getSource().getName() + "</strong>")+ "\n";
             conceptString = conceptString + Html.fromHtml(wordToShow) + "\n";
         }
         return conceptString;

@@ -1,7 +1,6 @@
 package ayds.dictionary.echo.model.business.services;
 
 import WikipediaService.APIConnection;
-import WikipediaService.WikipediaServiceModule;
 
 public class ServiceWikiAdapter implements ServiceDefinition {
 

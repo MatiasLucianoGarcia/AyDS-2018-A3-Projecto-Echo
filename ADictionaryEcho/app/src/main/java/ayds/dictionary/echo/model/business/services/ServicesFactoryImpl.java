@@ -15,7 +15,7 @@ class ServicesFactoryImpl implements ServiceFactory{
 
     ServicesFactoryImpl(BighugelabsService serviceBigHugLabsService, APIConnection apiConnection, TranslatorService translatorService){
         servicesMap = new HashMap<>();
-        servicesMap.put(Source.BIGHUGLABS,new ServiceBigHugLabsAdapter(serviceBigHugLabsService));
+        servicesMap.put(Source.BIGHUGELABS,new ServiceBigHugLabsAdapter(serviceBigHugLabsService));
         servicesMap.put(Source.WIKIPEDIA,new ServiceWikiAdapter(apiConnection));
         servicesMap.put(Source.YANDEX,new ServiceYandexAdapter(translatorService));
     }

@@ -88,15 +88,17 @@ public class ConceptDao_Impl implements ConceptDao {
   }
 
   @Override
-  public Concept findByName(String term) {
-    final String _sql = "SELECT * FROM Concept WHERE term LIKE ? LIMIT 1";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+  public Concept findByNameAndSource(String term, int source) {
+    final String _sql = "SELECT * FROM Concept WHERE term LIKE ? AND source LIKE ? LIMIT 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
     if (term == null) {
       _statement.bindNull(_argIndex);
     } else {
       _statement.bindString(_argIndex, term);
     }
+    _argIndex = 2;
+    _statement.bindLong(_argIndex, source);
     final Cursor _cursor = __db.query(_statement);
     try {
       final int _cursorIndexOfId = _cursor.getColumnIndexOrThrow("id");

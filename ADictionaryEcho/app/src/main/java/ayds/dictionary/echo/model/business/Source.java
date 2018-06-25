@@ -3,7 +3,7 @@ package ayds.dictionary.echo.model.business;
 public enum Source {
     NULL(""),
     YANDEX("Yandex"),
-    BIGHUGLABS("BigHugLabs"),
+    BIGHUGELABS("BigHugeLabs"),
     WIKIPEDIA("Wikipedia");
 
     private String name;
