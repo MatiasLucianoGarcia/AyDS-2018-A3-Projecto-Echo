@@ -47,44 +47,19 @@
       android:layout_height="wrap_content"
       android:orientation="vertical" >
 
-      <TextView
-          android:id="@+id/textViewSource1"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:padding="18dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-      <TextView
-          android:id="@+id/textViewMeaning1"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:padding="18dp"
-          android:textStyle="bold" />
+            <TextView
+                android:id="@+id/textPane"
+                android:layout_width="match_parent"
+                android:layout_height="321dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true" />
 
-      <TextView
-          android:id="@+id/textViewSource2"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:padding="18dp" />
+        </ScrollView>
 
-      <TextView
-          android:id="@+id/textViewMeaning2"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:padding="18dp"
-          android:textStyle="bold" />
-
-      <TextView
-          android:id="@+id/textViewSource3"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:padding="18dp" />
-
-      <TextView
-          android:id="@+id/textViewMeaning3"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:padding="18dp"
-          android:textStyle="bold" />
     </LinearLayout>
   </ScrollView>
 

@@ -26,13 +26,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
 
     private EditText textFieldForTranslatingWord;
     private Button buttonForTranslating;
-    private TextView labelWordSource1;
-    private TextView labelTranslatedWord1;
-    private TextView labelWordSource2;
-    private TextView labelTranslatedWord2;
-    private TextView labelWordSource3;
-    private TextView labelTranslatedWord3;
-    private TextView [] textViews;
+    private TextView textPane;
     private ProgressBar progressBar;
 
     private FormatConverter formatConverter;
@@ -65,18 +59,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         textFieldForTranslatingWord = findViewById(R.id.textField1);
         buttonForTranslating = findViewById(R.id.goButton);
         progressBar = findViewById(R.id.progressBar);
-        labelWordSource1 = findViewById(R.id.textViewSource1);
-        labelTranslatedWord1 = findViewById(R.id.textViewMeaning1);
-        labelWordSource2 = findViewById(R.id.textViewSource2);
-        labelTranslatedWord2 = findViewById(R.id.textViewMeaning2);
-        labelWordSource3 = findViewById(R.id.textViewSource3);
-        labelTranslatedWord3 = findViewById(R.id.textViewMeaning3);
-        textViews[0] = labelWordSource1;
-        textViews[1] = labelTranslatedWord1;
-        textViews[2] = labelWordSource2;
-        textViews[3] = labelTranslatedWord2;
-        textViews[4] = labelWordSource3;
-        textViews[5] = labelTranslatedWord3;
+        textPane = findViewById(R.id.textPane);
     }
 
     private void saveContext(){
@@ -109,22 +92,36 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
     }
 
-    private void updateTextFields(final List<TranslationConcept> translatedWord) {
-        int i = 0;
-        for (final TranslationConcept translationConcept : translatedWord) {
+    private void updateTextFields(final List<TranslationConcept> translatedWords) {
+        /*for (final TranslationConcept translationConcept : translatedWords) {
             final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
-            final TextView textView1 = textViews[i+1];
-            final TextView textView2 = textViews[i];
-            textViews[i+1].post(new Runnable() {
+            textPane.post(new Runnable() {
                 @Override
                 public void run() {
-                    textView1.setText(Html.fromHtml(wordToShow));
-                    textView2.setText(translationConcept.getSource().getName());
+                    textPane.setText(Html.fromHtml(wordToShow));
+                    textPane.setText(translationConcept.getSource().getName());
                     progressBar.setVisibility(View.GONE);
                 }
             });
-            i+=2;
+        }*/
+        final String conceptString = buildString(translatedWords);
+        textPane.post(new Runnable() {
+            @Override
+            public void run() {
+                textPane.setText(conceptString);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private String buildString(List<TranslationConcept> translatedWords) {
+        String conceptString = "";
+        for (TranslationConcept translationConcept: translatedWords) {
+            final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
+            conceptString = conceptString + translationConcept.getSource().getName() + "\n";
+            conceptString = conceptString + Html.fromHtml(wordToShow) + "\n";
         }
+        return conceptString;
     }
 
     private void createNewAlertDialog(String exceptionMessage) {
