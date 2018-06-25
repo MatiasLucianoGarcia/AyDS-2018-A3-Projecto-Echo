@@ -4,7 +4,10 @@ import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.business.services.ServiceAdministrator;
 import ayds.dictionary.echo.model.business.services.ServiceDefinition;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
-import com.example.yandex.service.TranslatorService;
+
+import java.util.List;
+import java.util.Map;
+
 import ayds.dictionary.echo.model.storage.Storage;
 
 class RepositoryImpl implements Repository {
@@ -19,12 +22,13 @@ class RepositoryImpl implements Repository {
         this.exceptionHandler = exceptionHandler;
     }
 
-    public TranslationConcept translateWord(String wordToTranslate) {
+    public List<TranslationConcept> translateWord(String wordToTranslate) {
         TranslationConcept translationConcept = new NullTranslationConcept();
         try{
             checkWellFormedSentence(wordToTranslate);
-            for(ServiceDefinition serviceDefinition : serviceAdministrator.getServices()) {
-                translationConcept = storage.getMeaning(wordToTranslate);
+            for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet())
+            {
+                translationConcept = storage.getMeaning(wordToTranslate,entry.getKey());
             }
         }
         catch(Exception exception){

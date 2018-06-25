@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ayds.dictionary.echo.R;
 import ayds.dictionary.echo.controller.TranslatorController;
 import ayds.dictionary.echo.model.TranslatorModel;
@@ -75,8 +77,8 @@ public class TranslatorViewActivity extends AppCompatActivity {
             }
         });
         model.setListener(new TranslatorModelListener() {
-            @Override public void didUpdateWord(TranslationConcept translatedWord) {
-                updateTextFields(translatedWord);
+            @Override public void didUpdateWord(List<TranslationConcept> translatedWords) {
+                updateTextFields(translatedWords);
             }
         });
         model.setExceptionListener(new TranslatorModelExceptionListener() {
@@ -92,7 +94,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
     }
 
-    private void updateTextFields(final TranslationConcept translatedWord) {
+    private void updateTextFields(final List<TranslationConcept> translatedWord) {
         final String wordToShow = formatConverter.formatTo(translatedWord.getMeaning(), labelTranslatedWord.getText().toString());
         labelTranslatedWord.post(new Runnable() {
             @Override
