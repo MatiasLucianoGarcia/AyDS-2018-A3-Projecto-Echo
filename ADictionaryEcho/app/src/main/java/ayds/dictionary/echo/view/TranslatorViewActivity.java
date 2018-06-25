@@ -25,9 +25,14 @@ import ayds.dictionary.echo.model.business.TranslationConcept;
 public class TranslatorViewActivity extends AppCompatActivity {
 
     private EditText textFieldForTranslatingWord;
-    private TextView labelWordSource;
     private Button buttonForTranslating;
-    private TextView labelTranslatedWord;
+    private TextView labelWordSource1;
+    private TextView labelTranslatedWord1;
+    private TextView labelWordSource2;
+    private TextView labelTranslatedWord2;
+    private TextView labelWordSource3;
+    private TextView labelTranslatedWord3;
+    private TextView [] textViews;
     private ProgressBar progressBar;
 
     private FormatConverter formatConverter;
@@ -59,9 +64,19 @@ public class TranslatorViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textFieldForTranslatingWord = findViewById(R.id.textField1);
         buttonForTranslating = findViewById(R.id.goButton);
-        labelTranslatedWord = findViewById(R.id.textPane1);
         progressBar = findViewById(R.id.progressBar);
-        labelWordSource = findViewById(R.id.textPane);
+        labelWordSource1 = findViewById(R.id.textViewSource1);
+        labelTranslatedWord1 = findViewById(R.id.textViewMeaning1);
+        labelWordSource2 = findViewById(R.id.textViewSource2);
+        labelTranslatedWord2 = findViewById(R.id.textViewMeaning2);
+        labelWordSource3 = findViewById(R.id.textViewSource3);
+        labelTranslatedWord3 = findViewById(R.id.textViewMeaning3);
+        textViews[0] = labelWordSource1;
+        textViews[1] = labelTranslatedWord1;
+        textViews[2] = labelWordSource2;
+        textViews[3] = labelTranslatedWord2;
+        textViews[4] = labelWordSource3;
+        textViews[5] = labelTranslatedWord3;
     }
 
     private void saveContext(){
@@ -95,15 +110,21 @@ public class TranslatorViewActivity extends AppCompatActivity {
     }
 
     private void updateTextFields(final List<TranslationConcept> translatedWord) {
-        final String wordToShow = formatConverter.formatTo(translatedWord.getMeaning(), labelTranslatedWord.getText().toString());
-        labelTranslatedWord.post(new Runnable() {
-            @Override
-            public void run() {
-                labelTranslatedWord.setText(Html.fromHtml(wordToShow));
-                labelWordSource.setText(translatedWord.getSource().getName());
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+        int i = 0;
+        for (final TranslationConcept translationConcept : translatedWord) {
+            final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
+            final TextView textView1 = textViews[i+1];
+            final TextView textView2 = textViews[i];
+            textViews[i+1].post(new Runnable() {
+                @Override
+                public void run() {
+                    textView1.setText(Html.fromHtml(wordToShow));
+                    textView2.setText(translationConcept.getSource().getName());
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+            i+=2;
+        }
     }
 
     private void createNewAlertDialog(String exceptionMessage) {

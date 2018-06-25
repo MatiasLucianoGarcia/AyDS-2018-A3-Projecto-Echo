@@ -54,7 +54,7 @@
           android:padding="18dp" />
 
       <TextView
-          android:id="@+id/textPaneMeaning1"
+          android:id="@+id/textViewMeaning1"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:padding="18dp"
@@ -67,7 +67,7 @@
           android:padding="18dp" />
 
       <TextView
-          android:id="@+id/textPaneMeaning2"
+          android:id="@+id/textViewMeaning2"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:padding="18dp"
@@ -80,7 +80,7 @@
           android:padding="18dp" />
 
       <TextView
-          android:id="@+id/textPaneMeaning3"
+          android:id="@+id/textViewMeaning3"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:padding="18dp"
