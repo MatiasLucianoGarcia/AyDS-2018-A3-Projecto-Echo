@@ -5,6 +5,7 @@ import ayds.dictionary.echo.model.business.services.ServiceAdministrator;
 import ayds.dictionary.echo.model.business.services.ServiceDefinition;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,32 +24,26 @@ class RepositoryImpl implements Repository {
     }
 
     public List<TranslationConcept> translateWord(String wordToTranslate) {
-        TranslationConcept translationConcept = new NullTranslationConcept();
+        List<TranslationConcept> translationConcepts = new ArrayList<>();
         try{
             checkWellFormedSentence(wordToTranslate);
-            for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet())
-            {
-                translationConcept = storage.getMeaning(wordToTranslate,entry.getKey());
+            for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet()) {
+                TranslationConcept translationConcept = storage.getMeaning(wordToTranslate,entry.getKey());
+                if (!translationConcept.getMeaning().equals("")) {
+                    translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
+                }
+                else{
+                    String translatedWord = entry.getValue().getResult(wordToTranslate);
+                    translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, entry.getKey());
+                    storage.saveTerm(translationConcept);
+                }
+                translationConcepts.add(translationConcept);
             }
         }
         catch(Exception exception){
             exceptionHandler.handleException(exception);
         }
-        try {
-
-            translationConcept = storage.getMeaning(wordToTranslate);
-            if (!translationConcept.getMeaning().equals("")) {
-                translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
-            }
-            else{
-                String translatedWord = translatorService.callCreateTranslatedWord(wordToTranslate);
-                translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, Source.YANDEX);
-                storage.saveTerm(translationConcept);
-            }
-        } catch(Exception exception){
-            exceptionHandler.handleException(exception);
-        }
-        return translationConcept;
+        return translationConcepts;
     }
 
     private void checkWellFormedSentence(String wordToCheck) throws NonTranslatableWordException {
