@@ -10,11 +10,11 @@ class ExceptionHandlerImpl implements ExceptionHandler {
     private TranslatorModelExceptionListener exceptionListener;
 
     @Override
-    public void handleException(Exception translatingWordException) {
+    public void handleException(Exception translatingWordException, Source source) {
         if(translatingWordException instanceof NoConnectionException || translatingWordException instanceof NonTranslatableWordException)
-            exceptionListener.sendExceptionMessage(translatingWordException.getMessage());
+            exceptionListener.sendExceptionMessage(source.getName()+": "+translatingWordException.getMessage());
         else
-            exceptionListener.sendExceptionMessage("Error inesperado");
+            exceptionListener.sendExceptionMessage(source.getName()+": Error inesperado");
     }
 
     @Override

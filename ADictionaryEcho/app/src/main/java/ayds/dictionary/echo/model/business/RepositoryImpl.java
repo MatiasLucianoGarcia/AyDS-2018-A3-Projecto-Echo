@@ -29,34 +29,9 @@ class RepositoryImpl implements Repository {
             checkWellFormedSentence(wordToTranslate);
             translationConcepts = iterateServices(translationConcepts,wordToTranslate);
         }
-        catch(NonTranslatableWordException e)
-        {
-            exceptionHandler.handleException(e);
+        catch(NonTranslatableWordException e) {
+            exceptionHandler.handleException(e,Source.NULL);
         }
-        return translationConcepts;
-    }
-
-    private List<TranslationConcept> iterateServices(List<TranslationConcept> translationConcepts, String wordToTranslate){
-            int i = 0;
-            for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet()) {
-                try{
-                    TranslationConcept translationConcept = storage.getMeaning(wordToTranslate,entry.getKey());
-                    if (!translationConcept.getMeaning().equals("")) {
-                        translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
-                    }
-                    else{
-                        String translatedWord = findMeaningInService(wordToTranslate,entry.getValue());
-                        translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, entry.getKey());
-                        storage.saveTerm(translationConcept);
-                    }
-                    translationConcepts.remove(i);
-                    translationConcepts.add(i,translationConcept);
-                }
-                catch (Exception exception){
-                    exceptionHandler.handleException(exception);
-                }
-                i++;
-            }
         return translationConcepts;
     }
 
@@ -72,6 +47,34 @@ class RepositoryImpl implements Repository {
         if(!SpellingChecker.isCorrect(wordToCheck)) {
             throw new NonTranslatableWordException();
         }
+    }
+
+    private List<TranslationConcept> iterateServices(List<TranslationConcept> translationConcepts, String wordToTranslate){
+            int i = 0;
+            for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet()) {
+                Source source = entry.getKey();
+                ServiceDefinition serviceDefinition = entry.getValue();
+
+                try{
+                    TranslationConcept translationConcept = storage.getMeaning(wordToTranslate,source);
+                    if (!translationConcept.getMeaning().equals("")) {
+                        translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
+                    }
+                    else{
+                        String translatedWord = findMeaningInService(wordToTranslate,serviceDefinition);
+                        translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, source);
+                        storage.saveTerm(translationConcept);
+                    }
+                    translationConcepts.remove(i);
+                    translationConcepts.add(i,translationConcept);
+                }
+                catch (Exception exception){
+                    exceptionHandler.handleException(exception,source);
+                }
+
+                i++;
+            }
+        return translationConcepts;
     }
 
     private String findMeaningInService(String wordToTranslate, ServiceDefinition serviceDefinition) throws Exception{

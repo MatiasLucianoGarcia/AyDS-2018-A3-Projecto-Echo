@@ -108,7 +108,7 @@ public class TranslatorViewActivity extends AppCompatActivity {
         for (TranslationConcept translationConcept: translatedWords) {
             final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
             conceptString = conceptString + Html.fromHtml("<strong>"+ translationConcept.getSource().getName() + "</strong>")+ "\n";
-            conceptString = conceptString + Html.fromHtml(wordToShow) + "\n";
+            conceptString = conceptString + Html.fromHtml(wordToShow) + "\n" +"\n";
         }
         return conceptString;
     }
