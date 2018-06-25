@@ -5,7 +5,11 @@ import ayds.dictionary.charlie.service.BighugelabsServiceModule;
 
 public class ServiceBigHugLabsAdapter implements ServiceDefinition {
 
-    BighugelabsService bighugelabsService = BighugelabsServiceModule.getInstance().getBighugelabsService();
+    BighugelabsService bighugelabsService;
+
+    public ServiceBigHugLabsAdapter (BighugelabsService bighugelabsService){
+        this.bighugelabsService=bighugelabsService;
+    }
 
     @Override
     public String getResult(String wordToGetResult) throws Exception {

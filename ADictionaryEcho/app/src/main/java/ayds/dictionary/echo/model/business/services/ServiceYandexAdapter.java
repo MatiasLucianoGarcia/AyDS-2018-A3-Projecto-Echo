@@ -5,7 +5,11 @@ import com.example.yandex.service.TranslatorService;
 
 public class ServiceYandexAdapter implements ServiceDefinition {
 
-    private TranslatorService translatorService = YandexModule.getInstance().getTranslatorService();
+    private TranslatorService translatorService;
+
+    public ServiceYandexAdapter(TranslatorService translatorService){
+        this.translatorService=translatorService;
+    }
 
     @Override
     public String getResult(String wordToGetResult) throws Exception{

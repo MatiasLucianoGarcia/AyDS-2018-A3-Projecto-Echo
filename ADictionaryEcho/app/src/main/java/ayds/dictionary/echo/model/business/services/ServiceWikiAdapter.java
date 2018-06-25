@@ -5,7 +5,11 @@ import WikipediaService.WikipediaServiceModule;
 
 public class ServiceWikiAdapter implements ServiceDefinition {
 
-    private APIConnection apiConnection = WikipediaServiceModule.getInstance().getAPIConnection();
+    private APIConnection apiConnection;
+
+    public ServiceWikiAdapter(APIConnection apiConnection){
+        this.apiConnection=apiConnection;
+    }
 
     @Override
     public String getResult(String wordToGetResult) throws Exception {
