@@ -1,7 +1,8 @@
 package ayds.dictionary.echo.model.business.services;
-import java.util.Map;
-import ayds.dictionary.echo.model.business.Source;
+
+import java.util.Set;
 
 public interface ServiceAdministrator {
-    Map<Source,ServiceDefinition> getServices();
+    Set<Source> getServices();
+    String getMeaningBySource(Source source,String wordToTranslate) throws Exception;
 }

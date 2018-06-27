@@ -2,10 +2,11 @@ package ayds.dictionary.echo.model.business;
 
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.business.services.ServiceAdministrator;
-import ayds.dictionary.echo.model.business.services.ServiceDefinition;
+import ayds.dictionary.echo.model.business.services.Source;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,21 +25,13 @@ class RepositoryImpl implements Repository {
     }
 
     public List<TranslationConcept> translateWord(String wordToTranslate) {
-        List<TranslationConcept> translationConcepts = initTranslationConcepts();
+        List<TranslationConcept> translationConcepts = new ArrayList<>();
         try{
             checkWellFormedSentence(wordToTranslate);
             translationConcepts = iterateServices(translationConcepts,wordToTranslate);
         }
         catch(NonTranslatableWordException e) {
-            exceptionHandler.handleException(e,Source.NULL);
-        }
-        return translationConcepts;
-    }
-
-    private List<TranslationConcept> initTranslationConcepts(){
-        List<TranslationConcept> translationConcepts = new ArrayList<>();
-        for(int i=0;i<serviceAdministrator.getServices().size();i++){
-            translationConcepts.add(i, new NullTranslationConcept());
+            exceptionHandler.handleException(e);
         }
         return translationConcepts;
     }
@@ -50,38 +43,27 @@ class RepositoryImpl implements Repository {
     }
 
     private List<TranslationConcept> iterateServices(List<TranslationConcept> translationConcepts, String wordToTranslate){
-            int i = 0;
-            for (Map.Entry<Source,ServiceDefinition> entry : serviceAdministrator.getServices().entrySet()) {
-                Source source = entry.getKey();
-                ServiceDefinition serviceDefinition = entry.getValue();
-
+        Map<Source,Exception> exceptions = new HashMap<>();
+            for(Source source : serviceAdministrator.getServices()){
                 try{
                     TranslationConcept translationConcept = storage.getMeaning(wordToTranslate,source);
                     if (!translationConcept.getMeaning().equals("")) {
                         translationConcept.setMeaning("[*]" + translationConcept.getMeaning());
                     }
                     else{
-                        String translatedWord = findMeaningInService(wordToTranslate,serviceDefinition);
+                        String translatedWord = serviceAdministrator.getMeaningBySource(source,wordToTranslate);
                         translationConcept =  new TranslationConcept(wordToTranslate,translatedWord, source);
                         storage.saveTerm(translationConcept);
                     }
-                    translationConcepts.remove(i);
-                    translationConcepts.add(i,translationConcept);
+                    translationConcepts.add(translationConcept);
                 }
                 catch (Exception exception){
-                    exceptionHandler.handleException(exception,source);
+                    exceptions.put(source,exception);
                 }
-
-                i++;
             }
+        if(!exceptions.isEmpty())
+            exceptionHandler.handleExceptions(exceptions);
         return translationConcepts;
-    }
-
-    private String findMeaningInService(String wordToTranslate, ServiceDefinition serviceDefinition) throws Exception{
-        String translatedWord = serviceDefinition.getResult(wordToTranslate);
-        if(translatedWord == null)
-            translatedWord = "";
-        return translatedWord;
     }
 
     @Override

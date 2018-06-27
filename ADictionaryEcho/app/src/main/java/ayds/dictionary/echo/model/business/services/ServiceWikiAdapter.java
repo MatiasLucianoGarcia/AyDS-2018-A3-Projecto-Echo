@@ -1,17 +1,28 @@
 package ayds.dictionary.echo.model.business.services;
 
 import WikipediaService.APIConnection;
+import ayds.dictionary.echo.model.exceptions.ModelNoConnectionException;
 
-public class ServiceWikiAdapter implements ServiceDefinition {
+class ServiceWikiAdapter implements ServiceDefinition {
 
     private APIConnection apiConnection;
 
-    public ServiceWikiAdapter(APIConnection apiConnection){
+    ServiceWikiAdapter(APIConnection apiConnection){
         this.apiConnection=apiConnection;
     }
 
     @Override
     public String getResult(String wordToGetResult) throws Exception {
-        return apiConnection.getDefinition(wordToGetResult).getMeaning();
+        String result = "";
+        try{
+            result = apiConnection.getDefinition(wordToGetResult).getMeaning();
+        }
+        catch(Exception exception){
+            if(exception.getMessage().contains("No se pudo conectar con la Wikipedia."))
+                throw new ModelNoConnectionException();
+            else
+                throw exception;
+        }
+        return result;
     }
 }

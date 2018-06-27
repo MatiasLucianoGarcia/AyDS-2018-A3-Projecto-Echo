@@ -7,7 +7,6 @@ import java.util.Map;
 
 import WikipediaService.APIConnection;
 import ayds.dictionary.charlie.service.BighugelabsService;
-import ayds.dictionary.echo.model.business.Source;
 
 class ServicesFactoryImpl implements ServiceFactory{
 

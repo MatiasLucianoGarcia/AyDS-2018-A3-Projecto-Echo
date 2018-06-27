@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.model.business;
+package ayds.dictionary.echo.model.business.services;
 
 public enum Source {
     NULL(""),

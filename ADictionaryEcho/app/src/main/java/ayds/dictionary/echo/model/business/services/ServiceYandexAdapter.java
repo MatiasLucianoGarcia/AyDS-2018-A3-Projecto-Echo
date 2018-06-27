@@ -1,17 +1,27 @@
 package ayds.dictionary.echo.model.business.services;
 
+import com.example.yandex.service.NoConnectionException;
 import com.example.yandex.service.TranslatorService;
 
-public class ServiceYandexAdapter implements ServiceDefinition {
+import ayds.dictionary.echo.model.exceptions.ModelNoConnectionException;
+
+class ServiceYandexAdapter implements ServiceDefinition {
 
     private TranslatorService translatorService;
 
-    public ServiceYandexAdapter(TranslatorService translatorService){
+    ServiceYandexAdapter(TranslatorService translatorService){
         this.translatorService=translatorService;
     }
 
     @Override
     public String getResult(String wordToGetResult) throws Exception{
-        return translatorService.callCreateTranslatedWord(wordToGetResult);
+        String result = "";
+        try{
+            result = translatorService.callCreateTranslatedWord(wordToGetResult);
+        }
+        catch(NoConnectionException exception) {
+            throw new ModelNoConnectionException();
+        }
+        return result;
     }
 }

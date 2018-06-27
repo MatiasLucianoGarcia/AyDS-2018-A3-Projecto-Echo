@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import ayds.dictionary.echo.model.business.NullTranslationConcept;
-import ayds.dictionary.echo.model.business.Source;
+import ayds.dictionary.echo.model.business.services.Source;
 import ayds.dictionary.echo.model.business.TranslationConcept;
 import ayds.dictionary.echo.model.storage.room.*;
 

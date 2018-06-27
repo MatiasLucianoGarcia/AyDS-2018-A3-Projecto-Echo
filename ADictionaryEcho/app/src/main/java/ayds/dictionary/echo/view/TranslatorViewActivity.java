@@ -19,7 +19,6 @@ import ayds.dictionary.echo.model.ModelModule;
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.TranslatorModelListener;
 import ayds.dictionary.echo.controller.ControllerModule;
-import ayds.dictionary.echo.model.business.Source;
 import ayds.dictionary.echo.model.business.TranslationConcept;
 
 public class TranslatorViewActivity extends AppCompatActivity {

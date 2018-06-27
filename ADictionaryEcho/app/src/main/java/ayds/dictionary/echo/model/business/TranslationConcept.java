@@ -1,5 +1,7 @@
 package ayds.dictionary.echo.model.business;
 
+import ayds.dictionary.echo.model.business.services.Source;
+
 public class TranslationConcept {
 
     private String term;
