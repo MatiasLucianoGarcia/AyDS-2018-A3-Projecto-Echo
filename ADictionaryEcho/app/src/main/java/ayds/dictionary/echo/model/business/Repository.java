@@ -6,5 +6,4 @@ import ayds.dictionary.echo.model.ExceptionHandler;
 
 public interface Repository {
     List<TranslationConcept> translateWord(String wordToTranslate);
-    void setExceptionHandler(ExceptionHandler exceptionHandler);
 }

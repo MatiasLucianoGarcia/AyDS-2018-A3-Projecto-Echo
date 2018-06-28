@@ -17,9 +17,10 @@ class RepositoryImpl implements Repository {
     private ServiceAdministrator serviceAdministrator;
     private ExceptionHandler exceptionHandler;
 
-    RepositoryImpl(Storage storage,ServiceAdministrator serviceAdministrator){
+    RepositoryImpl(Storage storage,ServiceAdministrator serviceAdministrator, ExceptionHandler exceptionHandler){
         this.storage = storage;
         this.serviceAdministrator = serviceAdministrator;
+        this.exceptionHandler = exceptionHandler;
     }
 
     public List<TranslationConcept> translateWord(String wordToTranslate) {
@@ -51,10 +52,4 @@ class RepositoryImpl implements Repository {
             exceptionHandler.handleExceptions(exceptions);
         return translationConcepts;
     }
-
-    @Override
-    public void setExceptionHandler(ExceptionHandler exceptionHandler) {
-        this.exceptionHandler = exceptionHandler;
-    }
-
 }

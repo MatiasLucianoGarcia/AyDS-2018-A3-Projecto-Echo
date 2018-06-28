@@ -11,7 +11,6 @@ class TranslatorModelImpl implements TranslatorModel {
     TranslatorModelImpl(Repository repository,ExceptionHandler exceptionHandler) {
         this.repository = repository;
         this.exceptionHandler = exceptionHandler;
-        this.repository.setExceptionHandler(exceptionHandler);
     }
 
     public void translateWord(final String wordToTranslate) {
