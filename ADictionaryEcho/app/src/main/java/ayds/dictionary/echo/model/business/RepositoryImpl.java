@@ -1,8 +1,8 @@
 package ayds.dictionary.echo.model.business;
 
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
-import ayds.dictionary.echo.model.business.services.ServiceAdministrator;
-import ayds.dictionary.echo.model.business.services.Source;
+import ayds.dictionary.echo.model.services.ServiceAdministrator;
+import ayds.dictionary.echo.model.services.Source;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
 import java.util.ArrayList;

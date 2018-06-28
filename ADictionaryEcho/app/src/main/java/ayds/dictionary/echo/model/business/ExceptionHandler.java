@@ -3,7 +3,7 @@ package ayds.dictionary.echo.model.business;
 import java.util.Map;
 
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
-import ayds.dictionary.echo.model.business.services.Source;
+import ayds.dictionary.echo.model.services.Source;
 
 public interface ExceptionHandler {
     void handleException(Exception translatingWordException);

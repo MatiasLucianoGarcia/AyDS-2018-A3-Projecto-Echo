@@ -2,7 +2,7 @@ package ayds.dictionary.echo.model.storage;
 
 import android.content.Context;
 
-import ayds.dictionary.echo.model.business.services.Source;
+import ayds.dictionary.echo.model.services.Source;
 import ayds.dictionary.echo.model.business.TranslationConcept;
 
 public interface Storage {

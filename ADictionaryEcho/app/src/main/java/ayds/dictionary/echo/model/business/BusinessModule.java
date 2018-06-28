@@ -1,7 +1,7 @@
 package ayds.dictionary.echo.model.business;
 
 
-import ayds.dictionary.echo.model.business.services.ServicesModule;
+import ayds.dictionary.echo.model.services.ServicesModule;
 import ayds.dictionary.echo.model.storage.StorageModule;
 
 public class BusinessModule {
