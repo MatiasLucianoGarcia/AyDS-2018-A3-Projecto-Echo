@@ -1,12 +1,24 @@
 package ayds.dictionary.echo.model.business;
 
-class SpellingChecker {
+public class SpellingChecker {
 
     private SpellingChecker() {
     }
 
-    static boolean isCorrect(String text){
+    public static boolean isOnlyAlphabetic(String text){
         return !(isFullWhiteSpaces(text) || isNull(text)) && isAlphabetic(text);
+    }
+
+    public static boolean isOnlyAlphabeticAndNumeric(String text){
+        return !(isFullWhiteSpaces(text) || isNull(text)) && isAlphabeticAndNumeric(text);
+    }
+
+    public static boolean isOnlyOneWord(String text){
+        return !(isFullWhiteSpaces(text) || isNull(text)) && isAlphabeticAndNumericAndUnique(text);
+    }
+
+    private static boolean isAlphabeticAndNumericAndUnique(String name) {
+        return name.matches("[a-zA-Z0-9]+");
     }
 
     private static boolean isFullWhiteSpaces(String s){
@@ -15,6 +27,10 @@ class SpellingChecker {
 
     private static boolean isAlphabetic(String name) {
         return name.matches("[a-zA-Z ]+");
+    }
+
+    private static boolean isAlphabeticAndNumeric(String name) {
+        return name.matches("[a-zA-Z0-9 ]+");
     }
 
     private static boolean isNull(String s){

@@ -1,8 +1,9 @@
 package ayds.dictionary.echo.model.business;
 
-import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
+import java.util.List;
+
+import ayds.dictionary.echo.model.ExceptionHandler;
 
 public interface Repository {
-    TranslationConcept translateWord(String wordToTranslate);
-    void setExceptionListener(TranslatorModelExceptionListener exceptionListener);
+    List<TranslationConcept> translateWord(String wordToTranslate);
 }

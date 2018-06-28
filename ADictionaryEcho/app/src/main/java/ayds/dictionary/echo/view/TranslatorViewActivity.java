@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ayds.dictionary.echo.R;
 import ayds.dictionary.echo.controller.TranslatorController;
 import ayds.dictionary.echo.model.TranslatorModel;
@@ -17,15 +19,13 @@ import ayds.dictionary.echo.model.ModelModule;
 import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.TranslatorModelListener;
 import ayds.dictionary.echo.controller.ControllerModule;
-import ayds.dictionary.echo.model.business.Source;
 import ayds.dictionary.echo.model.business.TranslationConcept;
 
 public class TranslatorViewActivity extends AppCompatActivity {
 
     private EditText textFieldForTranslatingWord;
-    private TextView labelWordSource;
     private Button buttonForTranslating;
-    private TextView labelTranslatedWord;
+    private TextView textPane;
     private ProgressBar progressBar;
 
     private FormatConverter formatConverter;
@@ -57,9 +57,8 @@ public class TranslatorViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textFieldForTranslatingWord = findViewById(R.id.textField1);
         buttonForTranslating = findViewById(R.id.goButton);
-        labelTranslatedWord = findViewById(R.id.textPane1);
         progressBar = findViewById(R.id.progressBar);
-        labelWordSource = findViewById(R.id.textPane);
+        textPane = findViewById(R.id.textPane);
     }
 
     private void saveContext(){
@@ -75,8 +74,8 @@ public class TranslatorViewActivity extends AppCompatActivity {
             }
         });
         model.setListener(new TranslatorModelListener() {
-            @Override public void didUpdateWord(TranslationConcept translatedWord) {
-                updateTextFields(translatedWord);
+            @Override public void didUpdateWord(List<TranslationConcept> translatedWords) {
+                updateTextFields(translatedWords);
             }
         });
         model.setExceptionListener(new TranslatorModelExceptionListener() {
@@ -92,16 +91,25 @@ public class TranslatorViewActivity extends AppCompatActivity {
         });
     }
 
-    private void updateTextFields(final TranslationConcept translatedWord) {
-        final String wordToShow = formatConverter.formatTo(translatedWord.getMeaning(), labelTranslatedWord.getText().toString());
-        labelTranslatedWord.post(new Runnable() {
+    private void updateTextFields(final List<TranslationConcept> translatedWords) {
+        final String conceptString = buildString(translatedWords);
+        textPane.post(new Runnable() {
             @Override
             public void run() {
-                labelTranslatedWord.setText(Html.fromHtml(wordToShow));
-                labelWordSource.setText(translatedWord.getSource().getName());
+                textPane.setText(conceptString);
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    private String buildString(List<TranslationConcept> translatedWords) {
+        String conceptString = "";
+        for (TranslationConcept translationConcept: translatedWords) {
+            final String wordToShow = formatConverter.formatTo(translationConcept.getMeaning(), translationConcept.getTerm());
+            conceptString = conceptString + Html.fromHtml("<strong>"+ translationConcept.getSource().getName() + "</strong>")+ "\n";
+            conceptString = conceptString + Html.fromHtml(wordToShow) + "\n" +"\n";
+        }
+        return conceptString;
     }
 
     private void createNewAlertDialog(String exceptionMessage) {

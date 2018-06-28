@@ -6,9 +6,11 @@ class TranslatorModelImpl implements TranslatorModel {
 
     private TranslatorModelListener listener;
     private Repository repository;
+    private ExceptionHandler exceptionHandler;
 
-    TranslatorModelImpl(Repository repository) {
+    TranslatorModelImpl(Repository repository,ExceptionHandler exceptionHandler) {
         this.repository = repository;
+        this.exceptionHandler = exceptionHandler;
     }
 
     public void translateWord(final String wordToTranslate) {
@@ -27,7 +29,7 @@ class TranslatorModelImpl implements TranslatorModel {
 
     @Override
     public void setExceptionListener(TranslatorModelExceptionListener translatorModelExceptionListener) {
-        repository.setExceptionListener(translatorModelExceptionListener);
+        exceptionHandler.setListener(translatorModelExceptionListener);
     }
 
 }

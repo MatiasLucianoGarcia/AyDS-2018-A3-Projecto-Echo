@@ -1,20 +1,24 @@
 package ayds.dictionary.echo.model.business;
 
-
-import com.example.yandex.service.ServiceModule;
+import ayds.dictionary.echo.model.ModelModule;
+import ayds.dictionary.echo.model.services.ServicesModule;
 import ayds.dictionary.echo.model.storage.StorageModule;
 
 public class BusinessModule {
-    private static final BusinessModule ourInstance = new BusinessModule();
+  private static final BusinessModule ourInstance = new BusinessModule();
 
-    public static BusinessModule getInstance() {
-        return ourInstance;
-    }
+  public static BusinessModule getInstance() {
+    return ourInstance;
+  }
 
-    private BusinessModule() {
-    }
+  private BusinessModule() {
+  }
 
-    public Repository getRepository(){
-        return new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServiceModule.getInstance().getTranslatorService(),new ExceptionHandlerImpl());
-    }
+  public Repository getRepository() {
+    return new RepositoryImpl(
+        StorageModule.getInstance().getDataBase(),
+        ServicesModule.getInstance().getServiceAdministrator(),
+        ModelModule.getInstance().getExceptionHandler()
+    );
+  }
 }

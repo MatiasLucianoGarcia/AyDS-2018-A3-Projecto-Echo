@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import ayds.dictionary.echo.model.business.NullTranslationConcept;
-import ayds.dictionary.echo.model.business.Source;
+import ayds.dictionary.echo.model.services.Source;
 import ayds.dictionary.echo.model.business.TranslationConcept;
 import ayds.dictionary.echo.model.storage.room.*;
 
@@ -35,8 +35,8 @@ class DataBase implements Storage {
         db.termDao().insert(concept);
     }
 
-    public TranslationConcept getMeaning(String term) {
-        Concept concept = db.termDao().findByName(term);
+    public TranslationConcept getMeaning(String term, Source source) {
+        Concept concept = db.termDao().findByNameAndSource(term, source.ordinal());
         if (concept != null) {
             return new TranslationConcept(term,concept.getMeaning(), Source.values()[concept.getSource()]);
         }
