@@ -3,7 +3,9 @@ package ayds.dictionary.echo.model.services;
 import java.io.IOException;
 
 import ayds.dictionary.charlie.service.BighugelabsService;
+import ayds.dictionary.echo.model.business.SpellingChecker;
 import ayds.dictionary.echo.model.exceptions.ModelNoConnectionException;
+import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
 class ServiceBigHugLabsAdapter implements ServiceDefinition {
 
@@ -17,6 +19,7 @@ class ServiceBigHugLabsAdapter implements ServiceDefinition {
     public String getResult(String wordToGetResult) throws Exception {
         String result = "";
         try{
+            checkWellFormedSentence(wordToGetResult);
             result = bighugelabsService.searchWord(wordToGetResult);
         }
         catch (IOException exception){
@@ -24,4 +27,11 @@ class ServiceBigHugLabsAdapter implements ServiceDefinition {
         }
         return result;
     }
+
+    private void checkWellFormedSentence(String wordToCheck) throws NonTranslatableWordException {
+        if(!SpellingChecker.isOnlyOneWord(wordToCheck)) {
+            throw new NonTranslatableWordException();
+        }
+    }
+
 }

@@ -1,7 +1,9 @@
 package ayds.dictionary.echo.model.services;
 
 import WikipediaService.APIConnection;
+import ayds.dictionary.echo.model.business.SpellingChecker;
 import ayds.dictionary.echo.model.exceptions.ModelNoConnectionException;
+import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
 class ServiceWikiAdapter implements ServiceDefinition {
 
@@ -15,6 +17,7 @@ class ServiceWikiAdapter implements ServiceDefinition {
     public String getResult(String wordToGetResult) throws Exception {
         String result = "";
         try{
+            checkWellFormedSentence(wordToGetResult);
             result = apiConnection.getDefinition(wordToGetResult).getMeaning();
         }
         catch(Exception exception){
@@ -25,4 +28,11 @@ class ServiceWikiAdapter implements ServiceDefinition {
         }
         return result;
     }
+
+    private void checkWellFormedSentence(String wordToCheck) throws NonTranslatableWordException {
+        if(!SpellingChecker.isOnlyAlphabeticAndNumeric(wordToCheck)) {
+            throw new NonTranslatableWordException();
+        }
+    }
+
 }

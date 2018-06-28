@@ -20,15 +20,14 @@ class ExceptionHandlerImpl implements ExceptionHandler {
 
     @Override
     public void handleExceptions(Map<Source, Exception> exceptions) {
-        boolean distinctExceptions = false;
+        String exceptionMessage = "";
         for(Map.Entry<Source,Exception> entry : exceptions.entrySet()){
-            if(!(entry.getValue() instanceof ModelNoConnectionException)){
-                exceptionListener.sendExceptionMessage(entry.getKey().getName()+": Error inesperado");
-                distinctExceptions = true;
-            }
+            if(entry.getValue() instanceof NonTranslatableWordException || entry.getValue() instanceof ModelNoConnectionException)
+                exceptionMessage += entry.getKey().getName() + ": "+entry.getValue().getMessage()+"\n";
+            else
+                exceptionMessage += entry.getKey().getName() + ": Error inesperado\n";
         }
-        if(!distinctExceptions)
-            exceptionListener.sendExceptionMessage("Error general: No hay conexion a internet");
+        exceptionListener.sendExceptionMessage(exceptionMessage);
     }
 
     @Override

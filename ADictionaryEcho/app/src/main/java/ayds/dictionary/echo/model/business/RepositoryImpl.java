@@ -3,7 +3,6 @@ package ayds.dictionary.echo.model.business;
 import ayds.dictionary.echo.model.ExceptionHandler;
 import ayds.dictionary.echo.model.services.ServiceAdministrator;
 import ayds.dictionary.echo.model.services.Source;
-import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,20 +24,8 @@ class RepositoryImpl implements Repository {
 
     public List<TranslationConcept> translateWord(String wordToTranslate) {
         List<TranslationConcept> translationConcepts = new ArrayList<>();
-        try{
-            checkWellFormedSentence(wordToTranslate);
-            translationConcepts = iterateServices(translationConcepts,wordToTranslate);
-        }
-        catch(NonTranslatableWordException e) {
-            exceptionHandler.handleException(e);
-        }
+        translationConcepts = iterateServices(translationConcepts,wordToTranslate);
         return translationConcepts;
-    }
-
-    private void checkWellFormedSentence(String wordToCheck) throws NonTranslatableWordException {
-        if(!SpellingChecker.isCorrect(wordToCheck)) {
-            throw new NonTranslatableWordException();
-        }
     }
 
     private List<TranslationConcept> iterateServices(List<TranslationConcept> translationConcepts, String wordToTranslate){
