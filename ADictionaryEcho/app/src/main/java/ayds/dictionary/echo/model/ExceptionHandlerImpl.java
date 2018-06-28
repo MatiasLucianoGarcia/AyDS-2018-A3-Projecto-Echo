@@ -1,8 +1,7 @@
-package ayds.dictionary.echo.model.business;
+package ayds.dictionary.echo.model;
 
 import java.util.Map;
 
-import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
 import ayds.dictionary.echo.model.services.Source;
 import ayds.dictionary.echo.model.exceptions.ModelNoConnectionException;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;

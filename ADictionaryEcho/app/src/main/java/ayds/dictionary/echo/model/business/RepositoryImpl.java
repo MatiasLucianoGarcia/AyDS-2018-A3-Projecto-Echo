@@ -1,6 +1,6 @@
 package ayds.dictionary.echo.model.business;
 
-import ayds.dictionary.echo.model.TranslatorModelExceptionListener;
+import ayds.dictionary.echo.model.ExceptionHandler;
 import ayds.dictionary.echo.model.services.ServiceAdministrator;
 import ayds.dictionary.echo.model.services.Source;
 import ayds.dictionary.echo.model.exceptions.NonTranslatableWordException;
@@ -18,10 +18,9 @@ class RepositoryImpl implements Repository {
     private ServiceAdministrator serviceAdministrator;
     private ExceptionHandler exceptionHandler;
 
-    RepositoryImpl(Storage storage,ServiceAdministrator serviceAdministrator,ExceptionHandler exceptionHandler){
+    RepositoryImpl(Storage storage,ServiceAdministrator serviceAdministrator){
         this.storage = storage;
         this.serviceAdministrator = serviceAdministrator;
-        this.exceptionHandler = exceptionHandler;
     }
 
     public List<TranslationConcept> translateWord(String wordToTranslate) {
@@ -67,8 +66,8 @@ class RepositoryImpl implements Repository {
     }
 
     @Override
-    public void setExceptionListener(TranslatorModelExceptionListener exceptionListener) {
-        exceptionHandler.setListener(exceptionListener);
+    public void setExceptionHandler(ExceptionHandler exceptionHandler) {
+        this.exceptionHandler = exceptionHandler;
     }
 
 }

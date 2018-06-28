@@ -15,6 +15,6 @@ public class BusinessModule {
     }
 
     public Repository getRepository(){
-        return new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServicesModule.getInstance().getServiceAdministrator(),new ExceptionHandlerImpl());
+        return new RepositoryImpl(StorageModule.getInstance().getDataBase(), ServicesModule.getInstance().getServiceAdministrator());
     }
 }

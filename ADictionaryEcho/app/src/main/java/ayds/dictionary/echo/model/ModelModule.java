@@ -19,7 +19,7 @@ public class ModelModule {
     }
 
     public void initTranslatorModel() {
-        translatorModel = new TranslatorModelImpl(BusinessModule.getInstance().getRepository());
+        translatorModel = new TranslatorModelImpl(BusinessModule.getInstance().getRepository(),new ExceptionHandlerImpl());
     }
 
     public TranslatorModel getTranslatorModel() {

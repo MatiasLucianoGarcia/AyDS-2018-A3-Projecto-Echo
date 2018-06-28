@@ -1,4 +1,4 @@
-package ayds.dictionary.echo.model.business;
+package ayds.dictionary.echo.model;
 
 import java.util.Map;
 
